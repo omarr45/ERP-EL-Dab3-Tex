@@ -12,11 +12,12 @@
 </head>
 <body>
 <form action="/addOrder" method="POST" class="order-from">
-    <h1>Add Order hey bro</h1>
+    <h1>Add Order</h1>
     <div class="mb-3">
         <label for="orderNumber" class="form-label">Order Number</label>
         <input type="number" class="form-control" id="orderNumber" name="orderNo">
     </div>
+    <label class="form-label">Order Type</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="x">
         <label class="form-check-label" for="flexRadioDefault1">
@@ -35,7 +36,7 @@
             z
         </label>
     </div>
-        <button  onclick="addOrder()" type="submit" class="submit">Add Order</button>
+    <button onclick="addOrder()" style="margin: 10px" class="btn btn-primary submit" type="submit" >Add Order</button>
 </form>
 
 
