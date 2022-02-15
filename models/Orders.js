@@ -28,6 +28,14 @@ const OrderSchema = new mongoose.Schema({
     Dep3:{
         type:Boolean,
         required:true
+    },
+    email:{
+        type:String,
+        default:false
+    },
+    password:{
+        type:String,
+        default:false
     }
 });
 
