@@ -10,7 +10,6 @@ router.get('/',(req,res)=>{
 })
 
 //Authenticate
-let adminSem=0,dep1Sem=0,dep2Sem=0,depSem3=0;
 const auth = (req,res,next) =>{
     let token=null;
     token = localStorage.getItem('accessTokenAdmin');

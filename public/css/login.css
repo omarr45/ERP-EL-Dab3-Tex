@@ -1,0 +1,20 @@
+body{
+    height: 700px;
+    display: flex;
+    background-image: url("../images/eldab3.jpg");
+    background-size: contain;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-box{
+    margin: auto 0;
+    background-color: #F7ECDE;
+    border-radius: 20px;
+}
+.login-form{
+    padding: 20px;
+}
+button{
+    margin-left: 70px;
+}
