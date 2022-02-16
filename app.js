@@ -28,7 +28,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use('/', require('./routes/orderRoutes'));
 
 server.listen(PORT, console.log("Server running on port 3000"));
-
+console.log(__dirname);
 io.on('connection',(socket)=>{
     socket.on('department1',(data)=>{
         socket.broadcast.emit('department1',data);
