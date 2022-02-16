@@ -91,7 +91,7 @@ router.post('/addOrder',async (req,res)=>{
 let errors = [];
 //Login Route
 router.get('/Login',(req,res)=>{
-    res.render(dir+'views/login.ejs',{error:errors});
+    res.render(dir+'views/Login.ejs',{error:errors});
 });
 
 router.post('/login',(req,res)=>{
@@ -135,22 +135,22 @@ router.post('/login',(req,res)=>{
 //Logout route
 router.get('/logoutAdmin',(req,res)=>{
     localStorage.setItem('accessTokenAdmin',null);
-    res.render(dir+'views/login.ejs',{error:errors});
+    res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 router.get('/logoutDep1',(req,res)=>{
     localStorage.setItem('accessTokenDep1',null);
-    res.render(dir+'views/login.ejs',{error:errors});
+    res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 router.get('/LogoutDep2',(req,res)=>{
     localStorage.setItem('accessTokenDep2',null);
-    res.render(dir+'views/login.ejs',{error:errors});
+    res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 router.get('/logoutDep3',(req,res)=>{
     localStorage.setItem('accessTokenDep3',null);
-    res.render(dir+'views/login.ejs',{error:errors});
+    res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 //Departments routes
