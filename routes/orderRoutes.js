@@ -91,7 +91,7 @@ router.post('/addOrder',async (req,res)=>{
 let errors = [];
 //Login Route
 router.get('/Login',(req,res)=>{
-    res.render('/app/views/login.ejs',{error:errors});
+    res.render(dir+'/views/login.ejs',{error:errors});
 });
 
 router.post('/login',(req,res)=>{
@@ -135,22 +135,22 @@ router.post('/login',(req,res)=>{
 //Logout route
 router.get('/logoutAdmin',(req,res)=>{
     localStorage.setItem('accessTokenAdmin',null);
-    res.render('login',{error:errors});
+    res.render(dir+'/views/login.ejs',{error:errors});
 })
 
 router.get('/logoutDep1',(req,res)=>{
     localStorage.setItem('accessTokenDep1',null);
-    res.render('login',{error:errors});
+    res.render(dir+'/views/login.ejs',{error:errors});
 })
 
 router.get('/LogoutDep2',(req,res)=>{
     localStorage.setItem('accessTokenDep2',null);
-    res.render('login',{error:errors});
+    res.render(dir+'/views/login.ejs',{error:errors});
 })
 
 router.get('/logoutDep3',(req,res)=>{
     localStorage.setItem('accessTokenDep3',null);
-    res.render('login',{error:errors});
+    res.render(dir+'/views/login.ejs',{error:errors});
 })
 
 //Departments routes
@@ -180,7 +180,7 @@ router.get('/Dep1',authDep1, async (req,res)=>{
         })
     })
     //console.log(docsArr2);
-    res.render('Dep1',{records:docsArr2});
+    res.render(dir+'/views/Dep1.ejs',{records:docsArr2});
 })
 
 router.get('/Dep2',authDep2, async (req,res)=>{
@@ -209,7 +209,7 @@ router.get('/Dep2',authDep2, async (req,res)=>{
         })
     })
     //console.log(docsArr2);
-    res.render('Dep2',{records:docsArr2});
+    res.render(dir+'/views/Dep2.ejs',{records:docsArr2});
 })
 
 router.get('/Dep3',authDep3, async (req,res)=>{
@@ -237,7 +237,7 @@ router.get('/Dep3',authDep3, async (req,res)=>{
             }
         })
     })
-    res.render('Dep3',{records:docsArr2});
+    res.render(dir+'/views/Dep3.ejs',{records:docsArr2});
 })
 
 router.get('/Admin',auth, async (req,res)=>{
