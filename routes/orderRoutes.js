@@ -7,7 +7,7 @@ let LocalStorage = require('node-localstorage').LocalStorage;
 let dir = __dirname.replace('orderRoutes','');
 localStorage = new LocalStorage('./scratch');
 router.get('/',(req,res)=>{
-    res.sendFile(dir + '/views/order.html');
+    res.sendFile('/app/views/order.html');
 })
 
 //Authenticate
@@ -90,7 +90,7 @@ router.post('/addOrder',async (req,res)=>{
 let errors = [];
 //Login Route
 router.get('/Login',(req,res)=>{
-    res.render(dir + '/views/login.ejs',{error:errors});
+    res.render('/app/views/login.ejs',{error:errors});
 });
 
 router.post('/login',(req,res)=>{
