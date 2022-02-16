@@ -4,11 +4,11 @@ const router = express.Router();
 const Orders = require('../models/Orders');
 const jwt = require('jsonwebtoken');
 let LocalStorage = require('node-localstorage').LocalStorage;
-let dir = __dirname.replace('orderRoutes','');
+let dir = __dirname.replace('routes','');
 localStorage = new LocalStorage('./scratch');
-console.log(__dirname);
+console.log(dir);
 router.get('/',(req,res)=>{
-    res.sendFile('/app/views/order.html');
+    res.sendFile(dir+'/views/order.html');
 })
 
 //Authenticate
