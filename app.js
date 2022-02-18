@@ -3,6 +3,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server,{cors: {origin:"*"}})
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 app.use(express.json());
@@ -18,6 +19,16 @@ app.set('view engine', 'ejs');
 
 
 const PORT = process.env.PORT || 4000;
+
+app.use(cookieParser());
+app.use(
+    session({
+        secret:"secret",
+        saveUninitialized:true,
+        resave:true
+    })
+)
+
 
 app.use(express.static(__dirname + '/public'));
 

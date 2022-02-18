@@ -3,64 +3,58 @@ require('dotenv').config();
 const router = express.Router();
 const Orders = require('../models/Orders');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 let LocalStorage = require('node-localstorage').LocalStorage;
 let dir = __dirname.replace('routes','');
 localStorage = new LocalStorage('./scratch');
-console.log(dir);
+
 router.get('/',(req,res)=>{
     res.sendFile(dir+'/views/order.html');
 })
 
+
+
 //Authenticate
-const auth = (req,res,next) =>{
-    let token=null;
-    token = localStorage.getItem('accessTokenAdmin');
-    console.log("middleware token:   " + token);
-    if(token!==null){
-        req.token = token;
-        next();
-    }
-    else{
-        res.sendStatus(403);
+const auth = (req,res,next) => {
+    if (!req.session.user)
+        res.redirect('login');
+    else {
+        if (req.session.user.email === "admin@gmail.com")
+            next();
+        else
+            res.sendStatus(403);
     }
 }
-
 const authDep1 = (req,res,next) =>{
-    let token=null;
-    token = localStorage.getItem('accessTokenDep1');
-    console.log("middleware token:   " + token);
-    if(token!==null){
-        req.token = token;
-        next();
-    }
-    else{
-        res.sendStatus(403);
+    if (!req.session.user)
+        res.redirect('login');
+    else {
+        if (req.session.user.email === "dep1@gmail.com")
+            next();
+        else
+            res.sendStatus(403);
     }
 }
 
 const authDep2 = (req,res,next) =>{
-    let token=null;
-    token = localStorage.getItem('accessTokenDep2');
-    console.log("middleware token:   " + token);
-    if(token!==null){
-        req.token = token;
-        next();
-    }
-    else{
-        res.sendStatus(403);
+    if (!req.session.user)
+        res.redirect('login');
+    else {
+        if (req.session.user.email === "dep2@gmail.com")
+            next();
+        else
+            res.sendStatus(403);
     }
 }
 
 const authDep3 = (req,res,next) =>{
-    let token=null;
-    token = localStorage.getItem('accessTokenDep3');
-    console.log("middleware token:   " + token);
-    if(token!==null){
-        req.token = token;
-        next();
-    }
-    else{
-        res.sendStatus(403);
+    if (!req.session.user)
+        res.redirect('login');
+    else {
+        if (req.session.user.email === "dep3@gmail.com")
+            next();
+        else
+            res.sendStatus(403);
     }
 }
 
@@ -108,23 +102,23 @@ router.post('/login',(req,res)=>{
             else {
                 let token
                 if (user.email === "admin@gmail.com") {
-                    token =  jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET_ADMIN,{expiresIn: '120m'});
-                    localStorage.setItem('accessTokenAdmin',token);
+                    req.session.user = user;
+                    req.session.save();
                     res.redirect('/Admin');
                 }
                 else if (user.email === "dep1@gmail.com") {
-                    token =  jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET_DEP1,{expiresIn: '120m'});
-                    localStorage.setItem('accessTokenDep1',token);
+                    req.session.user = user;
+                    req.session.save();
                     res.redirect('/Dep1');
                 }
                 else if (user.email === "dep2@gmail.com") {
-                    token =  jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET_DEP2,{expiresIn: '120m'});
-                    localStorage.setItem('accessTokenDep2',token);
+                    req.session.user = user;
+                    req.session.save();
                     res.redirect('/Dep2');
                 }
                 else if (user.email === "dep3@gmail.com") {
-                    token =  jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET_DEP3,{expiresIn: '120m'});
-                    localStorage.setItem('accessTokenDep3',token);
+                    req.session.user = user;
+                    req.session.save();
                     res.redirect('/Dep3');
                 }
             }
@@ -134,33 +128,27 @@ router.post('/login',(req,res)=>{
 
 //Logout route
 router.get('/logoutAdmin',(req,res)=>{
-    localStorage.setItem('accessTokenAdmin',null);
+    req.session.destroy();
     res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 router.get('/logoutDep1',(req,res)=>{
-    localStorage.setItem('accessTokenDep1',null);
+    req.session.destroy();
     res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 router.get('/LogoutDep2',(req,res)=>{
-    localStorage.setItem('accessTokenDep2',null);
+    req.session.destroy();
     res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 router.get('/logoutDep3',(req,res)=>{
-    localStorage.setItem('accessTokenDep3',null);
+    req.session.destroy();
     res.render(dir+'views/Login.ejs',{error:errors});
 })
 
 //Departments routes
 router.get('/Dep1',authDep1, async (req,res)=>{
-    jwt.verify(req.token,process.env.ACCESS_TOKEN_SECRET_DEP1,(err,authData)=>{
-        if(err)
-            res.sendStatus(403);
-        else
-            console.log(authData);
-    });
     let docs;
     let docsArr = [];
     try {
@@ -184,12 +172,6 @@ router.get('/Dep1',authDep1, async (req,res)=>{
 })
 
 router.get('/Dep2',authDep2, async (req,res)=>{
-    jwt.verify(req.token,process.env.ACCESS_TOKEN_SECRET_DEP2,(err,authData)=>{
-        if(err)
-            res.sendStatus(403);
-        else
-            console.log(authData);
-    });
     let docs;
     let docsArr = [];
     try {
@@ -213,12 +195,6 @@ router.get('/Dep2',authDep2, async (req,res)=>{
 })
 
 router.get('/Dep3',authDep3, async (req,res)=>{
-    jwt.verify(req.token,process.env.ACCESS_TOKEN_SECRET_DEP3,(err,authData)=>{
-        if(err)
-            res.sendStatus(403);
-        else
-            console.log(authData);
-    });
     let docs;
     let docsArr = [];
     try {
@@ -241,12 +217,6 @@ router.get('/Dep3',authDep3, async (req,res)=>{
 })
 
 router.get('/Admin',auth, async (req,res)=>{
-    jwt.verify(req.token,process.env.ACCESS_TOKEN_SECRET_ADMIN,(err,authData)=>{
-        if(err)
-            res.sendStatus(403);
-        else
-            console.log(authData);
-    });
     let docs;
     let docsArr = [];
     try {
