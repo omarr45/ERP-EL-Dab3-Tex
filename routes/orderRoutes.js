@@ -82,14 +82,15 @@ router.post('/addOrder',async (req,res)=>{
     console.log("new order saved");
     res.redirect('/');
 })
-let errors = [];
+
 //Login Route
-router.get('/Login',(req,res)=>{
+let errors = [];
+router.get('/login',(req,res)=>{
     res.render(dir+'views/Login.ejs',{error:errors});
 });
 
 router.post('/login',(req,res)=>{
-    console.log(req.body.email);
+    errors = [];
     Orders.findOne({email:req.body.email}).then(user=>{
         if(!user){
             errors.push('Wrong Email & Password Combination');
@@ -98,6 +99,7 @@ router.post('/login',(req,res)=>{
         else{
             if(user.password !== req.body.password){
                 errors.push('Wrong Email & Password Combination');
+                res.render('Login',{error:errors});
             }
             else {
                 let token
@@ -127,22 +129,7 @@ router.post('/login',(req,res)=>{
 });
 
 //Logout route
-router.get('/logoutAdmin',(req,res)=>{
-    req.session.destroy();
-    res.render(dir+'views/Login.ejs',{error:errors});
-})
-
-router.get('/logoutDep1',(req,res)=>{
-    req.session.destroy();
-    res.render(dir+'views/Login.ejs',{error:errors});
-})
-
-router.get('/LogoutDep2',(req,res)=>{
-    req.session.destroy();
-    res.render(dir+'views/Login.ejs',{error:errors});
-})
-
-router.get('/logoutDep3',(req,res)=>{
+router.get('/logout',(req,res)=>{
     req.session.destroy();
     res.render(dir+'views/Login.ejs',{error:errors});
 })

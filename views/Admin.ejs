@@ -9,7 +9,7 @@
 </head>
 <body>
 <h3>Admin</h3>
-<h3> <a style="text-decoration: none; color: white" href="/logoutAdmin">Logout</a> </h3>
+<h3> <a style="text-decoration: none; color: white" href="/logout">Logout</a> </h3>
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i+=13){%>
         <div class="card" style="width: 18rem;">
@@ -21,6 +21,15 @@
                 <form class="order-form" method="post" action="/DepartmentRedirection">
                     <input name="currentDep" style="display:none;" value="<%=records[i+11]%>">
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i+2]%>">
+                    <div class="visited-deps">
+                        <h4> Visited Departments </h4>
+                        <ul>
+                            <li> dep1 </li>
+                            <li> dep2 </li>
+                            <li> dep3 </li>
+                            <li> dep4 </li>
+                        </ul>
+                    </div>
                     <select name="selection" class="form-select" aria-label="Default select example">
                         <option value="Dep1">Dep1</option>
                         <option value="Dep2">Dep2</option>

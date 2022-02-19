@@ -24,3 +24,16 @@ h3{
     background-color: #F7ECDE;
     margin: 15px;
 }
+.visited-deps>ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    text-decoration: none;
+}
+.visited-deps>ul>li{
+    margin: 0 5px;
+    background-color: khaki;
+    padding: 1px;
+    border-radius: 5px;
+}
