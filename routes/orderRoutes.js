@@ -76,7 +76,8 @@ router.post('/addOrder',async (req,res)=>{
         currentDepartment,
         Dep1:flexRadioDefault==='x',
         Dep2:flexRadioDefault==='y',
-        Dep3:flexRadioDefault==='z'
+        Dep3:flexRadioDefault==='z',
+        visitedDeps:currentDepartment
     })
     newOrder.save();
     console.log("new order saved");
@@ -226,8 +227,30 @@ router.get('/Admin',auth, async (req,res)=>{
 })
 
 router.post('/DepartmentRedirection',async (req,res)=>{
+    // To get the visitedDeps value;
+    let docs;
+    let docsArr = [];
+    try {
+        docs = await Orders.find({'orderNo': req.body.currentOrderNo},{__v:0,_id:0,time:0,orderNo: 0, type: 0,currentDepartment:0,Dep1:0,Dep2:0,Dep3:0,email:0,password:0});
+        docs.forEach(doc=>{
+            let docHolder = doc.toString().replace(/[{'}]/g,'  ');
+            //console.log(docHolder);
+            docsArr.push(docHolder.split(':'));
+        })
+    }
+    catch (err){throw err}
+    let docsArr2 = [];
+    docsArr.forEach(rec=>{
+        rec.forEach(re=>{
+            if(re!=''){
+                docsArr2.push(re);
+            }
+        })
+    })
+
+    // Update its values
     try{
-        await Orders.updateOne({'orderNo': req.body.currentOrderNo},{$set:{'currentDepartment':req.body.selection}});
+        await Orders.updateOne({'orderNo': req.body.currentOrderNo},{$set:{'currentDepartment':req.body.selection,'visitedDeps':`${docsArr2[1]} ` + ` ${req.body.selection} `}});
         console.log('order updated');
     }
     catch(err){throw err;}

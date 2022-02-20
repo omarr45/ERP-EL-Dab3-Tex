@@ -16,6 +16,7 @@ h3{
     margin: 10px;
 }
 .orders-box{
+    justify-content: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

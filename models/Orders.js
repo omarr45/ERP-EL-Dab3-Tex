@@ -36,6 +36,10 @@ const OrderSchema = new mongoose.Schema({
     password:{
         type:String,
         default:false
+    },
+    visitedDeps:{
+        type:String,
+        default:false
     }
 });
 
