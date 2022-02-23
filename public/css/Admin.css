@@ -27,14 +27,16 @@ h3{
 }
 .visited-deps>ul{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    list-style: none;
-    text-decoration: none;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
 }
 .visited-deps>ul>li{
-    margin: 0 5px;
-    background-color: khaki;
+    width: 100%;
+    margin: 5px 0px;
     padding: 1px;
     border-radius: 5px;
+}
+.time{
+    width: 100%;
 }

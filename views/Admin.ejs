@@ -11,23 +11,32 @@
 <h3>Admin</h3>
 <h3> <a style="text-decoration: none; color: white" href="/logout">Logout</a> </h3>
 <div class="orders-box">
-    <%for(let i = 0 ;i<records.length;i+=13){%>
+    <%for(let i = 0,k=0 ;i<records.length;i++){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Order Number : <%= records[i+2] %></h5>
-                <p class="card-text">Order Time :  <%= records[i+5] %></p>
-                <p class="card-text">Order Type :  <%= records[i+8] %></p>
-                <p class="card-text">Current Department :  <%= records[i+11] %></p>
+                <h5 class="card-title">Order Number : <%= records[i].orderNo %></h5>
+                <p class="card-text">Order Time :  <%= records[i].time %> </p>
+                <p class="card-text">Order Type :  <%= records[i].type %></p>
+                <p class="card-text">Current Department :  <%= records[i].currentDepartment %></p>
                 <form class="order-form" method="post" action="/DepartmentRedirection">
-                    <input name="currentDep" style="display:none;" value="<%=records[i+11]%>">
-                    <input name="currentOrderNo" style="display:none;" value="<%=records[i+2]%>">
+                    <input name="currentDep" style="display:none;" value="<%=records[i].currentDepartment%>">
+                    <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <div class="visited-deps">
                         <h4> Visited Departments </h4>
+                        <p><%=records[i].visitedDeps%></p>
                         <ul>
-                            <li> dep1 </li>
-                            <li> dep2 </li>
-                            <li> dep3 </li>
-                            <li> dep4 </li>
+                            <li> Dep 1
+                                <p class="time">Entry Time: <%=records[i].Dep1EntryTime%></p>
+                                <p class="time">Exit Time:  <%=records[i].Dep1ExitTime%></p>
+                            </li>
+                            <li> Dep 2
+                                <p class="time">Entry Time: <%=records[i].Dep2EntryTime%></p>
+                                <p class="time">Exit Time:  <%=records[i].Dep2ExitTime%></p>
+                            </li>
+                            <li> Dep 3
+                                <p class="time">Entry Time: <%=records[i].Dep3EntryTime%></p>
+                                <p class="time">Exit Time:  <%=records[i].Dep3ExitTime%></p>
+                            </li>
                         </ul>
                     </div>
                     <select name="selection" class="form-select" aria-label="Default select example">
