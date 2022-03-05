@@ -1,4 +1,4 @@
-const socket = io('http://localhost:4000');
+const socket = io('https://el-dab3-tex.herokuapp.com/');
 socket.on('connection');
 socket.on('department2',(data)=>{
     console.log(data);

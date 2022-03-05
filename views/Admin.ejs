@@ -22,22 +22,24 @@
                     <input name="currentDep" style="display:none;" value="<%=records[i].currentDepartment%>">
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <div class="visited-deps">
-                        <h4> Visited Departments </h4>
-                        <p><%=records[i].visitedDeps%></p>
-                        <ul>
-                            <li> Dep 1
-                                <p class="time">Entry Time: <%=records[i].Dep1EntryTime%></p>
-                                <p class="time">Exit Time:  <%=records[i].Dep1ExitTime%></p>
-                            </li>
-                            <li> Dep 2
-                                <p class="time">Entry Time: <%=records[i].Dep2EntryTime%></p>
-                                <p class="time">Exit Time:  <%=records[i].Dep2ExitTime%></p>
-                            </li>
-                            <li> Dep 3
-                                <p class="time">Entry Time: <%=records[i].Dep3EntryTime%></p>
-                                <p class="time">Exit Time:  <%=records[i].Dep3ExitTime%></p>
-                            </li>
-                        </ul>
+                        <details>
+                            <summary><h4> Visited Departments </h4></summary>
+                            <p><%=records[i].visitedDeps%></p>
+                            <ul>
+                                <li> Dep 1
+                                    <p class="time">Entry Time: <%=records[i].Dep1EntryTime%></p>
+                                    <p class="time">Exit Time:  <%=records[i].Dep1ExitTime%></p>
+                                </li>
+                                <li> Dep 2
+                                    <p class="time">Entry Time: <%=records[i].Dep2EntryTime%></p>
+                                    <p class="time">Exit Time:  <%=records[i].Dep2ExitTime%></p>
+                                </li>
+                                <li> Dep 3
+                                    <p class="time">Entry Time: <%=records[i].Dep3EntryTime%></p>
+                                    <p class="time">Exit Time:  <%=records[i].Dep3ExitTime%></p>
+                                </li>
+                            </ul>
+                        </details>
                     </div>
                     <select name="selection" class="form-select" aria-label="Default select example">
                         <option value="Dep1">Dep1</option>
