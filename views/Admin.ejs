@@ -10,6 +10,8 @@
 <body>
 <h3>Admin</h3>
 <h3> <a style="text-decoration: none; color: white" href="/logout">Logout</a> </h3>
+<label for="exampleDataList" class="form-label">Search</label>
+<input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
     <%for(let i = 0,k=0 ;i<records.length;i++){%>
         <div class="card" style="width: 18rem;">
@@ -53,5 +55,6 @@
     <%} %>
 </div>
 <script src="/js/Dep1.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>
