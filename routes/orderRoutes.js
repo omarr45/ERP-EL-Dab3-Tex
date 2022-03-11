@@ -176,7 +176,7 @@ router.get('/logout',(req,res)=>{
 })
 
 //Departments routes
-router.get('/Dep1', async (req,res)=>{
+router.get('/Dep1',authDep1, async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -199,7 +199,7 @@ router.get('/Dep1', async (req,res)=>{
     res.render(dir+'views/Dep1.ejs',{records:docsArr2});
 })
 
-router.get('/Dep2', async (req,res)=>{
+router.get('/Dep2',authDep2, async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -222,7 +222,7 @@ router.get('/Dep2', async (req,res)=>{
     res.render(dir+'views/Dep2.ejs',{records:docsArr2});
 })
 
-router.get('/Dep3', async (req,res)=>{
+router.get('/Dep3',authDep3, async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -244,7 +244,7 @@ router.get('/Dep3', async (req,res)=>{
     res.render(dir+'views/Dep3.ejs',{records:docsArr2});
 })
 
-router.get('/Admin', async (req,res)=>{
+router.get('/Admin',auth, async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
