@@ -1,6 +1,6 @@
 const socket = io('http://localhost:4000');
 socket.on('connection');
-socket.on('department3',(data)=>{
+socket.on('قسم طباعه',(data)=>{
     console.log(data);
 
     // Creating elements

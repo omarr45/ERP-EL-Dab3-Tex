@@ -17,17 +17,61 @@ const OrderSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    clientName:{
+        type:String,
+        required:true
+    },
+    redirectionType:{
+        type:String,
+        required:true
+    },
+    Notes:{
+        type:String,
+        required:true
+    },
     Dep1:{
         type:Boolean,
-        required:true
+        default:false
     },
     Dep2:{
         type:Boolean,
-        required:true
+        default:false
     },
     Dep3:{
         type:Boolean,
-        required:true
+        rdefault:false
+    },
+    Dep4:{
+        type:Boolean,
+        default:false
+    },
+    Dep5:{
+        type:Boolean,
+        default:false
+    },
+    Dep6:{
+        type:Boolean,
+        default:false
+    },
+    Dep7:{
+        type:Boolean,
+        default:false
+    },
+    Dep8:{
+        type:Boolean,
+        default:false
+    },
+    Dep9:{
+        type:Boolean,
+        default:false
+    },
+    Dep10:{
+        type:Boolean,
+        default:false
+    },
+    Dep11:{
+        type:Boolean,
+        default:false
     },
     email:{
         type:String,
@@ -86,6 +130,46 @@ const OrderSchema = new mongoose.Schema({
         default:false
     },
     Dep6ExitTime:{
+        type:String,
+        default:false
+    },
+    Dep7EntryTime:{
+        type:String,
+        default:false
+    },
+    Dep7ExitTime:{
+        type:String,
+        default:false
+    },
+    Dep8EntryTime:{
+        type:String,
+        default:false
+    },
+    Dep8ExitTime:{
+        type:String,
+        default:false
+    },
+    Dep9EntryTime:{
+        type:String,
+        default:false
+    },
+    Dep9ExitTime:{
+        type:String,
+        default:false
+    },
+    Dep10EntryTime:{
+        type:String,
+        default:false
+    },
+    Dep10ExitTime:{
+        type:String,
+        default:false
+    },
+    Dep11EntryTime:{
+        type:String,
+        default:false
+    },
+    Dep11ExitTime:{
         type:String,
         default:false
     },

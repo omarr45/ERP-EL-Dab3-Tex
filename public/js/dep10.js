@@ -1,6 +1,6 @@
 const socket = io('http://localhost:4000');
 socket.on('connection');
-socket.on('قسم الفرد',(data)=>{
+socket.on('قسم غسيل الطباعه',(data)=>{
     console.log(data);
     // Creating elements
     const orderBox = document.createElement('div');

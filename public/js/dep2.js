@@ -1,6 +1,6 @@
 const socket = io('http://localhost:4000');
 socket.on('connection');
-socket.on('department2',(data)=>{
+socket.on('قسم الرام',(data)=>{
     console.log(data);
 
 

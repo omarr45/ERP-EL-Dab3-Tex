@@ -5,19 +5,69 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/Dep1.css">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>El Dab3 Tex</title>
 </head>
 <body>
-<%for(let i = 0 ;i<records.length;i+=6){%>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Order Number : <%= records[i+1] %></h5>
-            <p class="card-text">Order Time :  <%= records[i+3] %></p>
-            <p class="card-text">Order Type :  <%= records[i+5] %></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+<h3>قسم الكستره</h3>
+<h3> <a style="text-decoration: none; color: white" href="/logout">تسجيل الخروج</a> </h3>
+<label for="exampleDataList" class="form-label">ابحث</label>
+<input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
+<div class="orders-box">
+    <%for(let i = 0 ;i<records.length;i++){%>
+    <%if(records[i].currentDepartment==="قسم-بوليش"){%>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
+                <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
+                <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
+                <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
+                <form class="order-form" method="post" action="/DepartmentRedirection">
+                    <input name="currentDep" style="display:none;" value="<%=records[i].currentDepartment%>">
+                    <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
+                    <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
+                    <label for="exampleDataList" class="form-label">توجيه</label>
+                    <input name="orderDep" class="form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                    <datalist id="datalistOptions">
+                        <option value="قسم-الفرد">قسم الفرد</option>
+                        <option value="قسم-الرام">قسم الرام</option>
+                        <option value="قسم-طباعه">قسم طباعه</option>
+                        <option value="قسم-صباغه">قسم صباغه</option>
+                        <option value="قسم-كستره">قسم كستره</option>
+                        <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
+                        <option value="قسم-كمبكتور-علي-المقفول">قسم كمبكتور علي القفول</option>
+                        <option value="قسم-تغليف">قسم تغليف</option>
+                        <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
+                        <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
+                    </datalist>
+                    <button style="margin: 10px; " class="btn btn-outline-primary submit" type="submit" >Redirect</button>
+                </form>
+            </div>
         </div>
-    </div>
-<%} %>
-<script src="/js/Dep1.js"></script>
+    <%}%>
+    <%} %>
+</div>
+<div class="horizontal-line"></div>
+<div class="orders-box">
+    <%for(let i = 0 ;i<records.length;i++){%>
+    <%if(records[i].currentDepartment!=="قسم-بوليش"){%>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
+                <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
+                <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
+                <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
+            </div>
+        </div>
+    <%}%>
+    <%} %>
+</div>
+<script src="/js/Dep5.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ body{
     align-items: center;
     background-image: url("../images/eldab3.jpg");
     background-size: contain;
+    text-align: right;
 }
 h3{
     text-align: center;
@@ -42,4 +43,8 @@ h3{
 }
 .form-label-css{
     width: 20%;
+}
+ul{
+    text-align: right;
+    direction:rtl;
 }

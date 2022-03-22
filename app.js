@@ -42,14 +42,35 @@ app.use('/', require('./routes/orderRoutes'));
 server.listen(PORT, console.log("Server running on port 3000"));
 
 io.on('connection',(socket)=>{
-    socket.on('department1',(data)=>{
-        socket.broadcast.emit('department1',data);
+    socket.on('قسم الفرد',(data)=>{
+        socket.broadcast.emit('قسم الفرد',data);
     })
-    socket.on('department2',(data)=>{
-        socket.broadcast.emit('department2',data);
+    socket.on('قسم الرام',(data)=>{
+        socket.broadcast.emit('قسم الرام',data);
     })
-    socket.on('department3',(data)=>{
-        socket.broadcast.emit('department3',data);
+    socket.on('قسم طباعه',(data)=>{
+        socket.broadcast.emit('قسم طباعه',data);
+    })
+    socket.on('قسم صباغه',(data)=>{
+        socket.broadcast.emit('قسم صباغه',data);
+    })
+    socket.on('قسم كستره',(data)=>{
+        socket.broadcast.emit('قسم كستره',data);
+    })
+    socket.on('قسم بوليش كمبكتور علي المفتوح',(data)=>{
+        socket.broadcast.emit('قسم بوليش كمبكتور علي المفتوح',data);
+    })
+    socket.on('قسم بوليش كمبكتور علي القفول',(data)=>{
+        socket.broadcast.emit('قسم بوليش كمبكتور علي القفول',data);
+    })
+    socket.on('قسم تغليف',(data)=>{
+        socket.broadcast.emit('قسم تغليف',data);
+    })
+    socket.on('قسم غسيل الطباعه',(data)=>{
+        socket.broadcast.emit('قسم غسيل الطباعه',data);
+    })
+    socket.on('قسم جاهز للاستلام',(data)=>{
+        socket.broadcast.emit('قسم جاهز للاستلام',data);
     })
     console.log("Order dep " + socket.id);
 })
