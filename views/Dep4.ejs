@@ -14,7 +14,7 @@
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>
-    <%if(records[i].currentDepartment==="قسم-طباعه"){%>
+    <%if(records[i].currentDepartment==="قسم-صباغه"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
