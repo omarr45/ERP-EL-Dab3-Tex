@@ -449,7 +449,7 @@ router.get('/Dep4', async (req,res)=>{
 })
 
 
-// Dep5  = كستره
+// Dep5  = بوليش
 
 router.get('/Dep5', async (req,res)=>{
     let docs;
@@ -474,7 +474,7 @@ router.get('/Dep5', async (req,res)=>{
 })
 
 
-// Dep6  = بولش
+// Dep6  = كستره
 
 router.get('/Dep6', async (req,res)=>{
     let docs;
