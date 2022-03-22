@@ -2449,7 +2449,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             }
         }
     }
-    else if(orderDep==="قسم-غسيل-الطباعه"){
+    else if(orderDep==="قسم-جاهز-للاستلام"){
         if(currentDep === "قسم-الفرد") {
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
