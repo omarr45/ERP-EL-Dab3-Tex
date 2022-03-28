@@ -105,7 +105,7 @@ router.post('/addOrder',async (req,res)=>{
             throw err;
         }
     }
-    else if(orderDep==="قسم-الطباعه") {
+    else if(orderDep==="قسم-طباعه") {
         try {
             const newOrder = await new Orders({
                 orderNo,
