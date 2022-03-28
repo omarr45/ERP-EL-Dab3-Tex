@@ -17,8 +17,14 @@
     <%if(records[i].currentDepartment==="قسم-صباغه"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                <%if(records[i].redirectionType==="طباعه"){%>
+                    <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                <%}%>
+                <%if(records[i].redirectionType==="سباغه"){%>
+                    <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
+                <%}%>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
@@ -56,8 +62,14 @@
     <%if(records[i].currentDepartment!=="قسم-صباغه"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                <%if(records[i].redirectionType==="طباعه"){%>
+                    <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                <%}%>
+                <%if(records[i].redirectionType==="سباغه"){%>
+                    <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
+                <%}%>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>

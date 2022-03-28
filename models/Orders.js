@@ -29,6 +29,14 @@ const OrderSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    graphNo:{
+        type:String,
+        default:false
+    },
+    requiredColor:{
+        type:String,
+        default:false
+    },
     Dep1:{
         type:Boolean,
         default:false

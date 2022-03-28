@@ -5,9 +5,10 @@ const ordersHolder = orders[0].innerHTML;
 search = () =>{
     const searchInput = document.querySelector('.form-label-css');
     for(let i = 0 ;i<cards.length;i++) {
-        let orderNo = cards[i].children[0].children[1].innerText;
+        let orderNo = cards[i].children[0].children[0].innerText;
         orderNo = orderNo.split(':');
         orderNo = orderNo[1].toString().replace(" ", '');
+        console.log(searchInput.value+ "   " + orderNo);
         if (searchInput.value === orderNo) {
             console.log('found');
             orderBox.innerHTML = "";

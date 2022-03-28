@@ -8,11 +8,63 @@ let LocalStorage = require('node-localstorage').LocalStorage;
 let dir = __dirname.replace('routes','');
 localStorage = new LocalStorage('./scratch');
 
-router.get('/',(req,res)=>{
-    res.sendFile(dir+'/views/order.html');
+router.get('/',async(req,res)=>{
+    let docs;
+    let docsArr = [];
+    try {
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs.forEach(doc=>{
+            let docHolder = doc.toString().replace(/[{',}]/g,'  ');
+            docsArr.push(docHolder.split(' '));
+        })
+    }
+    catch (err){throw err}
+    let docsArr2 = [];
+    docsArr.forEach(rec=>{
+        rec.forEach(re=>{
+            if(re!=''){
+                docsArr2.push(re);
+            }
+        })
+    })
+    res.render(dir+'/views/order.ejs',{records:docs});
 })
 
+// Delete order Route
+router.post('/DeleteOrder',async(req,res)=>{
+    try{
+        const DeletedOrder = await Orders.deleteOne({orderNo:req.body.currentOrderNo});
+        console.log("Order Deleted Successfully");
+    }
+    catch (err) {throw err};
+    console.log(req.body.page);
+    if(req.body.page === "order")
+        res.redirect('/');
+    else
+        res.redirect('/Admin');
+})
 
+router.get('/Shops',async(req,res)=>{
+    let docs;
+    let docsArr = [];
+    try {
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs.forEach(doc=>{
+            let docHolder = doc.toString().replace(/[{',}]/g,'  ');
+            docsArr.push(docHolder.split(' '));
+        })
+    }
+    catch (err){throw err}
+    let docsArr2 = [];
+    docsArr.forEach(rec=>{
+        rec.forEach(re=>{
+            if(re!=''){
+                docsArr2.push(re);
+            }
+        })
+    })
+    res.render(dir+'/views/Shops.ejs',{records:docs});
+})
 
 //Authenticate
 const auth = (req,res,next) => {
@@ -61,7 +113,7 @@ const authDep3 = (req,res,next) =>{
 // Order Routes
 router.post('/addOrder',async (req,res)=>{
 
-    const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes} = req.body;
+    const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor} = req.body;
     console.log(orderDep+" "+flexRadioDefault);
     if(orderDep==="قسم-الفرد") {
         try {
@@ -76,7 +128,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 1,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -97,7 +151,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 2,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -118,7 +174,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 3,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -139,7 +197,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 4,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -160,7 +220,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 5,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -181,7 +243,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 6,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -202,7 +266,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 7,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -223,7 +289,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 8,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -244,7 +312,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 9,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -265,7 +335,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 10,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -286,7 +358,9 @@ router.post('/addOrder',async (req,res)=>{
                 DepNo: 11,
                 redirectionType:flexRadioDefault,
                 clientName,
-                Notes
+                Notes,
+                graphNo,
+                requiredColor
 
             })
             newOrder.save();
@@ -356,7 +430,7 @@ router.get('/Dep1', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -371,7 +445,8 @@ router.get('/Dep1', async (req,res)=>{
             }
         })
     })
-    console.log(docs.length);
+    console.log(docs);
+   // console.log(docs[0].graphNo);
     res.render(dir+'views/Dep1.ejs',{records:docs});
 })
 
@@ -381,7 +456,7 @@ router.get('/Dep2', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -406,7 +481,7 @@ router.get('/Dep3', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -430,7 +505,7 @@ router.get('/Dep4', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -455,7 +530,7 @@ router.get('/Dep5', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -480,7 +555,7 @@ router.get('/Dep6', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -505,7 +580,7 @@ router.get('/Dep7', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -530,7 +605,7 @@ router.get('/Dep8',async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -555,7 +630,7 @@ router.get('/Dep9', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -579,7 +654,7 @@ router.get('/Dep10', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -603,7 +678,7 @@ router.get('/Dep11', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1});
+        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -657,11 +732,13 @@ router.get('/Admin', async (req,res)=>{
             Dep10ExitTime:1,
             Dep11EntryTime:1,
             Dep11ExitTime:1,
-            DepNo:1
+            DepNo:1,
+            graphNo:1,
+            requiredColor:1
         });
-        console.log(docs);
+        //console.log(docs);
         docs.forEach(doc=>{
-            console.log(doc);
+            //console.log(doc);
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
@@ -677,7 +754,7 @@ router.get('/Admin', async (req,res)=>{
         rec.forEach(re=>{
             if(re!=='' && re!==/\n/g && re!=='false'){
                 docsArr2.push(re);
-                console.log(re);
+                //console.log(re);
                 if(re==='Dep1EntryTime:') {
                     isDep = 1;
                     isVis = 0;
@@ -751,7 +828,9 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             Dep10ExitTime:0,
             Dep11EntryTime:0,
             Dep11ExitTime:0,
-            visitedDeps:0
+            visitedDeps:0,
+            graphNo:0,
+            requiredColor:0
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{'}]/g,'  ');
@@ -804,7 +883,9 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             Dep10ExitTime:0,
             Dep11EntryTime:0,
             Dep11ExitTime:0,
-            DepNo:0
+            DepNo:0,
+            graphNo:0,
+            requiredColor:0
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{'}]/g,'  ');
