@@ -1882,7 +1882,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             }
         }
     }
-    else if(orderDep==="قسم كمبكتور علي المفتوح"){
+    else if(orderDep==="قسم-كمبكتور-علي-المفتوح"){
         if(currentDep === "قسم-الفرد") {
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {

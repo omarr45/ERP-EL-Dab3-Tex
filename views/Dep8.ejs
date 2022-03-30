@@ -14,7 +14,7 @@
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>
-    <%if(records[i].currentDepartment==="قسم-كمبكتور-علي-القفول"){%>
+    <%if(records[i].currentDepartment==="قسم-كمبكتور-علي-المقفول"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
@@ -59,7 +59,7 @@
 <div class="horizontal-line"></div>
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>
-    <%if(records[i].currentDepartment!=="قسم-كمبكتور-علي-القفول"){%>
+    <%if(records[i].currentDepartment!=="قسم-كمبكتور-علي-المقفول"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
