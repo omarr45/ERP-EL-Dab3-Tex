@@ -105,10 +105,11 @@
         </datalist>
     </div>
     <label for="exampleDataList" class="form-label">توجيه</label>
-    <input name="orderDep" class="form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
+    <input oninput="sel()" name="orderDep" class="Dep2Type-input form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
     <datalist id="datalistOptions">
         <option value="قسم-الفرد">قسم الفرد</option>
-        <option value="قسم-الرام">قسم الرام</option>
+        <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
+        <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
         <option value="قسم-طباعه">قسم طباعه</option>
         <option value="قسم-صباغه">قسم صباغه</option>
         <option value="قسم-بوليش">قسم بوليش</option>
@@ -119,11 +120,13 @@
         <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
         <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
     </datalist>
+    <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
     <div class="input-group">
         <span class="input-group-text">ملاحظات</span>
         <textarea name="Notes" class="form-control" aria-label="With textarea"></textarea>
     </div>
     <button onclick="addOrder()" style="margin: 10px" class="btn btn-primary submit" type="submit" >إضافه الاوردر</button>
+    <%= errorsOrder %>
 </form>
 <div class="horizontal-line"></div>
 <div class="orders-box">
@@ -141,6 +144,12 @@
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                <%if(records[i].currentDepartment=== "قسم-الرام"  && records[i].Dep2Type === 1){%>
+                    <p class="card-text">النوع : تثبيت</p>
+                <%}%>
+                <%if(records[i].currentDepartment=== "قسم-الرام"  && records[i].Dep2Type === 2){%>
+                    <p class="card-text">النوع : تجهيز</p>
+                <%}%>
                 <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
                 <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
                 <form action="/DeleteOrder" method="POST" class="order-from">

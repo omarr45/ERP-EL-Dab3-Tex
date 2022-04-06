@@ -12,7 +12,18 @@ router.get('/',async(req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
@@ -27,7 +38,7 @@ router.get('/',async(req,res)=>{
             }
         })
     })
-    res.render(dir+'/views/order.ejs',{records:docs});
+    res.render(dir+'/views/order.ejs',{records:docs,errorsOrder:errorsOrder});
 })
 
 // Delete order Route
@@ -36,7 +47,9 @@ router.post('/DeleteOrder',async(req,res)=>{
         const DeletedOrder = await Orders.deleteOne({orderNo:req.body.currentOrderNo});
         console.log("Order Deleted Successfully");
     }
-    catch (err) {throw err};
+    catch (err) {
+        res.redirect('/login');
+    };
     console.log(req.body.page);
     if(req.body.page === "order")
         res.redirect('/');
@@ -111,10 +124,12 @@ const authDep3 = (req,res,next) =>{
 }
 
 // Order Routes
+let errorsOrder = []
+let errors = [];
 router.post('/addOrder',async (req,res)=>{
-
-    const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor} = req.body;
-    console.log(orderDep+" "+flexRadioDefault);
+    errorsOrder = []
+    const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor, Dep2Type} = req.body;
+    console.log(orderDep+" "+flexRadioDefault + "  " + Dep2Type);
     if(orderDep==="قسم-الفرد") {
         try {
             const newOrder = await new Orders({
@@ -130,36 +145,39 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
-    else if(orderDep==="قسم-الرام") {
+    else if(orderDep==="قسم-الرام-تثبيت" || orderDep==="قسم-الرام-تجهيز") {
         try {
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
                 time: new Date().toLocaleString(),
-                currentDepartment:orderDep,
+                currentDepartment:'قسم-الرام',
                 Dep2: true,
-                visitedDeps: orderDep,
+                visitedDeps: 'قسم-الرام',
                 Dep2EntryTime: new Date().toLocaleString(),
                 DepNo: 2,
                 redirectionType:flexRadioDefault,
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
-        }
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);        }
     }
     else if(orderDep==="قسم-طباعه") {
         try {
@@ -176,12 +194,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-صباغه") {
@@ -199,12 +219,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-بوليش") {
@@ -222,12 +244,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-كستره") {
@@ -245,12 +269,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-كمبكتور-علي-المفتوح") {
@@ -268,12 +294,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-كمبكتور-علي-المقفول") {
@@ -291,12 +319,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-تغليف") {
@@ -314,12 +344,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-غسيل-الطباعه") {
@@ -337,12 +369,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     else if(orderDep==="قسم-جاهز-للاستلام") {
@@ -360,12 +394,14 @@ router.post('/addOrder',async (req,res)=>{
                 clientName,
                 Notes,
                 graphNo,
-                requiredColor
+                requiredColor,
+                Dep2Type
 
             })
             newOrder.save();
         } catch (err) {
-            throw err;
+            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+            res.render('Login',errorsOrder);
         }
     }
     console.log("new order saved");
@@ -373,7 +409,6 @@ router.post('/addOrder',async (req,res)=>{
 })
 
 //Login Route
-let errors = [];
 router.get('/login',(req,res)=>{
     res.render(dir+'views/Login.ejs',{error:errors});
 });
@@ -430,13 +465,28 @@ router.get('/Dep1', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{
+            _id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -456,13 +506,28 @@ router.get('/Dep2', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{
+            _id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -481,13 +546,28 @@ router.get('/Dep3', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{
+            _id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -505,13 +585,27 @@ router.get('/Dep4', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -530,13 +624,27 @@ router.get('/Dep5', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -555,13 +663,27 @@ router.get('/Dep6', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -580,13 +702,27 @@ router.get('/Dep7', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -605,13 +741,27 @@ router.get('/Dep8',async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     console.log(docs);
     let docsArr2 = [];
     docsArr.forEach(rec=>{
@@ -630,13 +780,27 @@ router.get('/Dep9', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -654,13 +818,27 @@ router.get('/Dep10', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -678,13 +856,27 @@ router.get('/Dep11', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
-        docs = await Orders.find({email:false},{_id:0,time:1,orderNo: 1, type: 1,currentDepartment:1,clientName:1,Notes:1,redirectionType:1,graphNo:1,requiredColor:1});
+        docs = await Orders.find({email:false},{_id:0,
+            time:1,
+            orderNo: 1,
+            type: 1,
+            currentDepartment:1,
+            clientName:1,
+            Notes:1,
+            redirectionType:1,
+            graphNo:1,
+            requiredColor:1,
+            Dep2Type:1
+        });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -743,7 +935,10 @@ router.get('/Admin', async (req,res)=>{
             docsArr.push(docHolder.split(' '));
         })
     }
-    catch (err){throw err}
+    catch (err){
+        errorsOrder.push("لم يتم اظهار القسم, تفقد شبكه الانترنت او الرجوع للمطور")
+        res.render('Login',errorsOrder);
+    }
     let docsArr2 = [];
     let isDep=0;
     let isVis=0;
@@ -906,8 +1101,8 @@ router.post('/DepartmentRedirection',async (req,res)=>{
     //let depNoSpaces = docsArr2[1].replace(/ /g, '');
     let No = parseInt(DepNo[0][4]);
     No++;
-    let x = docsArr2[4];
-    //console.log("1  " + docsArr2[1] +"  2  " + docsArr2[2] +" 3  " + docsArr2[3] + "  4  " + docsArr2[4]  )
+    let x = docsArr2[5];
+    //console.log("1  " + docsArr2[5] +"  2  " + docsArr2[6] +" 3  " + docsArr2[7] + "  4  " + docsArr2[8]  )
     x = x.replace(/^\s+|\s+$/gm,'');
     console.log(orderDep);
     if(orderDep === "قسم-الفرد") {
@@ -1072,16 +1267,22 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             }
         }
     }
-    else if(orderDep === "قسم-الرام") {
+    else if(orderDep==="قسم-الرام-تثبيت" || orderDep==="قسم-الرام-تجهيز") {
+        let type=0;
+        if(orderDep==="قسم-الرام-تثبيت")
+            type=1;
+        else
+            type=2;
         if (currentDep === "قسم-الفرد") {
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep1ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1093,11 +1294,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep3ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1109,11 +1311,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep4ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1125,11 +1328,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep5ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1141,11 +1345,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep6ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1157,11 +1362,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep7ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1173,11 +1379,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep8ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1189,11 +1396,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep9ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1205,11 +1413,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep10ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');
@@ -1221,11 +1430,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
-                        'currentDepartment': orderDep,
+                        'currentDepartment': 'قسم-الرام',
                         'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
                         'Dep11ExitTime': new Date().toLocaleString(),
                         'Dep2EntryTime': new Date().toLocaleString(),
-                        'DepNo': No
+                        'DepNo': No,
+                        'Dep2Type':type
                     }
                 });
                 console.log('order updated');

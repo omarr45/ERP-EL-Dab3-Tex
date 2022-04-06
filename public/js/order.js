@@ -4,6 +4,16 @@ const radioTeba3a = document.querySelector('#Teba3a');
 const radioSeba8a = document.querySelector('#Seba8a');
 const Teba3a = document.querySelectorAll('.graphNo');
 const Seba8a = document.querySelectorAll('.requiredColor');
+const Dep2Type = document.querySelector('.Dep2Type');
+const Dep2TypeInput = document.querySelector('.Dep2Type-input');
+
+const sel = () =>{
+   if(Dep2TypeInput.value === 'قسم-الرام-تثبيت'){
+      Dep2Type.value = 1;
+   }
+   else
+      Dep2Type.value = 2;
+}
 
 Seba8a[0].style.display="none";
 Seba8a[1].style.display="none";

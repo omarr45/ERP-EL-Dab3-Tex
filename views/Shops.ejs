@@ -25,6 +25,12 @@
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                <%if(records[i].currentDepartment=== "قسم-الرام"  && records[i].Dep2Type === 1){%>
+                    <p class="card-text">النوع : تثبيت</p>
+                <%}%>
+                <%if(records[i].currentDepartment=== "قسم-الرام"  && records[i].Dep2Type === 2){%>
+                    <p class="card-text">النوع : تجهيز</p>
+                <%}%>
                 <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
                 <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
             </div>

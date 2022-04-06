@@ -27,7 +27,7 @@ const OrderSchema = new mongoose.Schema({
     },
     Notes:{
         type:String,
-        required:true
+        default:false
     },
     graphNo:{
         type:String,
@@ -35,6 +35,10 @@ const OrderSchema = new mongoose.Schema({
     },
     requiredColor:{
         type:String,
+        default:false
+    },
+    Dep2Type:{
+        type:Number,
         default:false
     },
     Dep1:{
