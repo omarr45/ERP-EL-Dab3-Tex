@@ -25,6 +25,10 @@
                 <%if(records[i].redirectionType==="سباغه"){%>
                     <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
                 <%}%>
+                <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
@@ -57,6 +61,7 @@
     <%} %>
 </div>
 <div class="horizontal-line"></div>
+<h3>حركه التشغيل الخاصه بالمصنع</h3>
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>
     <%if(records[i].currentDepartment!=="قسم-تغليف"){%>
@@ -70,6 +75,10 @@
                 <%if(records[i].redirectionType==="سباغه"){%>
                     <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
                 <%}%>
+                <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>

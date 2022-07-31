@@ -1,7 +1,7 @@
 body{
     display: flex;
     background-image: url("../images/eldab3.jpg");
-    background-size: contain;
+    background-repeat: no-repeat;
     flex-direction: column;
     justify-content: center;
     align-items: center;

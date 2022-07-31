@@ -1,6 +1,5 @@
 body{
     background-image: url("../images/eldab3.jpg");
-    background-size: contain;
     display: flex;
     flex-direction: column;
     justify-content: center;

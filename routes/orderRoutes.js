@@ -22,7 +22,11 @@ router.get('/',async(req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -128,7 +132,8 @@ let errorsOrder = []
 let errors = [];
 router.post('/addOrder',async (req,res)=>{
     errorsOrder = []
-    const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor, Dep2Type} = req.body;
+    const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor, Dep2Type,
+        flexRadioDefault2, mediumRequired, widthRequired, machineNo } = req.body;
     console.log(orderDep+" "+flexRadioDefault + "  " + Dep2Type);
     if(orderDep==="قسم-الفرد") {
         try {
@@ -146,8 +151,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
-
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
             })
             newOrder.save();
         } catch (err) {
@@ -171,7 +179,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -195,7 +207,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -220,7 +236,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -245,7 +265,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -270,7 +294,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -295,7 +323,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -320,7 +352,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -345,7 +381,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -370,7 +410,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -395,7 +439,11 @@ router.post('/addOrder',async (req,res)=>{
                 Notes,
                 graphNo,
                 requiredColor,
-                Dep2Type
+                Dep2Type,
+                textureType:flexRadioDefault2,
+                mediumRequired,
+                widthRequired,
+                machineNo
 
             })
             newOrder.save();
@@ -431,6 +479,8 @@ router.post('/login',(req,res)=>{
                     req.session.user = user;
                     req.session.save();
                     res.redirect('/Admin');
+                    console.log("hello")
+                    console.log(req.session);
                 }
                 else if (user.email === "dep1@gmail.com") {
                     req.session.user = user;
@@ -461,7 +511,7 @@ router.get('/logout',(req,res)=>{
 //Departments routes
 
 // Dep1 = قسم الفرد
-router.get('/Dep1', async (req,res)=>{
+router.get('/Dep1',authDep1, async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -476,7 +526,11 @@ router.get('/Dep1', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -517,7 +571,11 @@ router.get('/Dep2', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -557,7 +615,11 @@ router.get('/Dep3', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -595,7 +657,11 @@ router.get('/Dep4', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -634,7 +700,11 @@ router.get('/Dep5', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -673,7 +743,11 @@ router.get('/Dep6', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -712,7 +786,11 @@ router.get('/Dep7', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -751,7 +829,11 @@ router.get('/Dep8',async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -790,7 +872,11 @@ router.get('/Dep9', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -828,7 +914,11 @@ router.get('/Dep10', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -866,7 +956,11 @@ router.get('/Dep11', async (req,res)=>{
             redirectionType:1,
             graphNo:1,
             requiredColor:1,
-            Dep2Type:1
+            Dep2Type:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -889,7 +983,7 @@ router.get('/Dep11', async (req,res)=>{
 })
 
 
-router.get('/Admin', async (req,res)=>{
+router.get('/Admin',auth, async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -926,7 +1020,11 @@ router.get('/Admin', async (req,res)=>{
             Dep11ExitTime:1,
             DepNo:1,
             graphNo:1,
-            requiredColor:1
+            requiredColor:1,
+            textureType:1,
+            mediumRequired:1,
+            widthRequired:1,
+            machineNo:1
         });
         //console.log(docs);
         docs.forEach(doc=>{
@@ -1025,7 +1123,11 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             Dep11ExitTime:0,
             visitedDeps:0,
             graphNo:0,
-            requiredColor:0
+            requiredColor:0,
+            textureType:0,
+            mediumRequired:0,
+            widthRequired:0,
+            machineNo:0
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{'}]/g,'  ');

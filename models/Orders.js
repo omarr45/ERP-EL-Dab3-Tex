@@ -37,6 +37,22 @@ const OrderSchema = new mongoose.Schema({
         type:String,
         default:false
     },
+    textureType:{
+        type:String,
+        required:true
+    },
+    mediumRequired:{
+        type:String,
+        required:true
+    },
+    widthRequired:{
+        type:String,
+        required:true
+    },
+    machineNo:{
+        type:Number,
+        required:true
+    },
     Dep2Type:{
         type:Number,
         default:false

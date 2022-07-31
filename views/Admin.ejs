@@ -10,6 +10,7 @@
 <body>
 <h3>Admin</h3>
 <h3> <a style="text-decoration: none; color: white" href="/logout">Logout</a> </h3>
+<button onclick="window.print()" class="print-button"><span class="print-icon"></span></button>
 <label for="exampleDataList" class="form-label">Search</label>
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
@@ -24,6 +25,10 @@
                 <%if(records[i].redirectionType==="سباغه"){%>
                     <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
                 <%}%>
+                <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
@@ -33,7 +38,7 @@
                 <%if(records[i].currentDepartment=== "قسم-الرام"  && records[i].Dep2Type === 2){%>
                     <p class="card-text">النوع : تجهيز</p>
                 <%}%>
-                <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
+                <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
                 <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
                 <div class="visited-deps">
                     <details>
@@ -87,11 +92,6 @@
                         </ul>
                     </details>
                 </div>
-                <form action="/DeleteOrder" method="POST" class="order-from">
-                    <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
-                    <input name="page" style="display:none;" value="admin">
-                    <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
-                </form>
             </div>
         </div>
     <%} %>
