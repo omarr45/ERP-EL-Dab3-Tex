@@ -53,6 +53,10 @@ const OrderSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    inchNo:{
+        type:Number,
+        required:true
+    },
     Dep2Type:{
         type:Number,
         default:false

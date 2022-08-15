@@ -43,6 +43,10 @@
         <span class="input-group-text" id="inputGroup-sizing-sm">العرض المطلوب</span>
         <input type="number" class="form-control" name="widthRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
     </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">رقم البوصه</span>
+        <input type="number" class="form-control" name="inchNo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+    </div>
     <div class="form-check">
         <input class="form-check-input" value="دائري" type="radio" name="flexRadioDefault2" id="circular">
         <label class="form-check-label" for="circular">
@@ -166,6 +170,7 @@
                 <%}%>
                 <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
                 <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                <p class="card-text">رقم البوصه :  <%= records[i].inchNo %> </p>
                 <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
                 <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
