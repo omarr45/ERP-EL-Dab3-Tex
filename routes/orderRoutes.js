@@ -522,7 +522,7 @@ router.get('/logout',(req,res)=>{
 //Departments routes
 
 // Dep1 = قسم الفرد
-router.get('/Dep1',authDep1, async (req,res)=>{
+router.get('/Dep1', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -1005,7 +1005,7 @@ router.get('/Dep11', async (req,res)=>{
 })
 
 
-router.get('/Admin',auth, async (req,res)=>{
+router.get('/Admin', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
