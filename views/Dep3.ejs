@@ -17,17 +17,24 @@
     <%if(records[i].currentDepartment==="قسم-طباعه"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <h5 class="card-title">رقم الكارت : <%= records[i].orderNo %></h5>
                 <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <%if(records[i].redirectionType==="طباعه"){%>
-                    <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                    <form action="/changeGraphNo" method="POST">
+                        <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">الرقم الجديد</span>
+                            <input type="number" class="form-control" name="newNo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" >
+                            <input style="display: none" type="text" class="form-control orderNo" value="<%= records[i].orderNo %>" name="orderNo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" >
+                        </div>
+                        <button class="btn btn-primary submit" type="submit"> تعديل الرقم</button>
+                    </form>
                 <%}%>
                 <%if(records[i].redirectionType==="سباغه"){%>
                     <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
                 <%}%>
                 <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
                 <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                <p class="card-text">رقم البوصه :  <%= records[i].inchNo %> </p>
                 <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
                 <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
@@ -68,7 +75,7 @@
     <%if(records[i].currentDepartment!=="قسم-طباعه"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <h5 class="card-title">رقم الكارت : <%= records[i].orderNo %></h5>
                 <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <%if(records[i].redirectionType==="طباعه"){%>
                     <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
@@ -78,7 +85,6 @@
                 <%}%>
                 <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
                 <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                <p class="card-text">رقم البوصه :  <%= records[i].inchNo %> </p>
                 <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
                 <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>

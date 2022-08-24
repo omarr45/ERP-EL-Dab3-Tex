@@ -14,7 +14,7 @@
     <%for(let i = 0,k=0 ;i<records.length;i++){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <h5 class="card-title">رقم الكارت : <%= records[i].orderNo %></h5>
                 <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <%if(records[i].redirectionType==="طباعه"){%>
                     <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
@@ -24,7 +24,6 @@
                 <%}%>
                 <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
                 <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                <p class="card-text">رقم البوصه :  <%= records[i].inchNo %> </p>
                 <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
                 <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>

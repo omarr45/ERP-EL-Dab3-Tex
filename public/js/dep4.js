@@ -85,3 +85,4 @@ socket.on('قسم صباغه',(data)=>{
         redirectionSelect.appendChild(redirectionOptionsArr[i]);
     }
 });
+

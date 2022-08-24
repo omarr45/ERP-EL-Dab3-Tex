@@ -1093,6 +1093,38 @@ router.get('/Admin', async (req,res)=>{
     res.render('Admin',{records:docs,times:depTimes,deps:deps});
 })
 
+router.post('/changeRequiredColor',async (req,res)=>{
+    const {newColor,orderNo} = req.body;
+    console.log(newColor + "  " + orderNo);
+    try {
+        await Orders.updateOne({'orderNo': orderNo}, {
+            $set: {
+                'requiredColor': newColor
+            }
+        });
+    }
+    catch (err){
+        res.redirect('/dep4');
+    }
+    res.redirect('/dep4');
+});
+
+router.post('/changeGraphNo',async (req,res)=>{
+    const {newNo,orderNo} = req.body;
+    console.log(newNo + "  " + orderNo);
+    try {
+        await Orders.updateOne({'orderNo': orderNo}, {
+            $set: {
+                'graphNo': newNo
+            }
+        });
+    }
+    catch (err){
+        res.redirect('/dep3');
+    }
+    res.redirect('/dep3');
+});
+
 router.post('/DepartmentRedirection',async (req,res)=>{
     // To get the visitedDeps value;
     console.log("i am here");
