@@ -12,11 +12,11 @@ app.use(bodyparser.json());
 app.use(express.urlencoded({ extended: false }));
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
+
 require('dotenv').config();
 
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
-
 
 const PORT = process.env.PORT || 4000;
 

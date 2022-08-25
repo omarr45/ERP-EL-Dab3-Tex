@@ -16,7 +16,7 @@
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
     <% let arr = ['قسم-الفرد','قسم-الرام-تثبيت','قسم-الرام-تجهيز', 'قسم-طباعه', 'قسم-صباغه', 'قسم-بوليش', 'قسم-كستره','قسم-كمبكتور-علي-المفتوح','قسم-كمبكتور-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
-    <%for(let j = 0 ;j<11;j++){%>
+    <%for(let j = 0 ;j<=11;j++){%>
     <div class="horizontal-line" style="color: white; text-align: center; font-size: 30px"><%= arr[j] %></div>
         <%for(let i = 0 ;i<records.length;i++){%>
             <%if(records[i].currentDepartment === arr[j]){%>
@@ -49,51 +49,51 @@
                         <div class="visited-deps">
                             <details>
                                 <summary><h4> الاقسام التي تم زيارتها </h4></summary>
-                                <p><%=records[i].visitedDeps%></p>
+                                <p>[<%=records[i].visitedDeps%>]</p>
                                 <ul>
                                     <li> قسم فرد
-                                        <p class="time">وقت الدخول: <%=records[i].Dep1EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep1ExitTime%></p>
+                                        <p class="time"> وقت الدخول: <br> <%=records[i].Dep1EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep1ExitTime%></p>
                                     </li>
                                     <li> قسم رام
-                                        <p class="time">وقت الدخول: <%=records[i].Dep2EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep2ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep2EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep2ExitTime%></p>
                                     </li>
                                     <li> قسم طباعه
-                                        <p class="time">وقت الدخول: <%=records[i].Dep3EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep3ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep3EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep3ExitTime%></p>
                                     </li>
                                     <li> قسم صباغه
-                                        <p class="time">وقت الدخول: <%=records[i].Dep4EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep4ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep4EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep4ExitTime%></p>
                                     </li>
                                     <li> قسم بوليش
-                                        <p class="time">وقت الدخول: <%=records[i].Dep5EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep5ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep5EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep5ExitTime%></p>
                                     </li>
                                     <li> قسم كستره
-                                        <p class="time">وقت الدخول: <%=records[i].Dep6EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep6ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep6EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep6ExitTime%></p>
                                     </li>
                                     <li> قسم كمبكتور علي المفتوح
-                                        <p class="time">وقت الدخول: <%=records[i].Dep7EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep7ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep7EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep7ExitTime%></p>
                                     </li>
                                     <li> قسم كمبكتور علي المقفول
-                                        <p class="time">وقت الدخول: <%=records[i].Dep8EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep8ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep8EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep8ExitTime%></p>
                                     </li>
                                     <li> قسم تغليف
-                                        <p class="time">وقت الدخول: <%=records[i].Dep9EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep9ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep9EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep9ExitTime%></p>
                                     </li>
                                     <li> قسم غسيل الطباعه
-                                        <p class="time">وقت الدخول: <%=records[i].Dep10EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep10ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep10EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep10ExitTime%></p>
                                     </li>
                                     <li> قسم جاهز للاستلام
-                                        <p class="time">وقت الدخول: <%=records[i].Dep11EntryTime%></p>
-                                        <p class="time">وقت الخروج:  <%=records[i].Dep11ExitTime%></p>
+                                        <p class="time">وقت الدخول: <br><%=records[i].Dep11EntryTime%></p>
+                                        <p class="time">وقت الخروج:  <br><%=records[i].Dep11ExitTime%></p>
                                     </li>
                                 </ul>
                             </details>

@@ -26,8 +26,7 @@ router.get('/',async(req,res)=>{
             textureType:1,
             mediumRequired:1,
             widthRequired:1,
-            machineNo:1,
-            inchNo:1
+            machineNo:1
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
@@ -134,14 +133,14 @@ let errors = [];
 router.post('/addOrder',async (req,res)=>{
     errorsOrder = []
     const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor, Dep2Type,
-        flexRadioDefault2, mediumRequired, widthRequired, machineNo, inchNo } = req.body;
+        flexRadioDefault2, mediumRequired, widthRequired, machineNo } = req.body;
     console.log(orderDep+" "+flexRadioDefault + "  " + Dep2Type);
     if(orderDep==="قسم-الفرد") {
         try {
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString({timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep1: true,
                 visitedDeps: orderDep,
@@ -156,8 +155,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
             })
             newOrder.save();
         } catch (err) {
@@ -185,8 +183,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
             })
             newOrder.save();
         } catch (err) {
@@ -213,8 +210,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -243,8 +239,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -273,8 +268,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -303,8 +297,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -333,8 +326,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -363,8 +355,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -393,8 +384,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -423,8 +413,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -453,8 +442,7 @@ router.post('/addOrder',async (req,res)=>{
                 textureType:flexRadioDefault2,
                 mediumRequired,
                 widthRequired,
-                machineNo,
-                inchNo
+                machineNo
 
             })
             newOrder.save();
@@ -1125,6 +1113,37 @@ router.post('/changeGraphNo',async (req,res)=>{
     res.redirect('/dep3');
 });
 
+
+const departmentsEntryTime = new Map();
+const departmentsExitTime = new Map();
+departmentsExitTime.set('قسم-الفرد','Dep1ExitTime');
+departmentsExitTime.set('قسم-الرام-تثبيت','Dep2ExitTime');
+departmentsExitTime.set('قسم-الرام-تجهيز','Dep2ExitTime');
+departmentsExitTime.set('قسم-طباعه','Dep3ExitTime');
+departmentsExitTime.set('قسم-صباغه','Dep4ExitTime');
+departmentsExitTime.set('قسم-بوليش','Dep5ExitTime');
+departmentsExitTime.set('قسم-كستره','Dep6ExitTime');
+departmentsExitTime.set('قسم-كمبكتور-علي-المفتوح','Dep7ExitTime');
+departmentsExitTime.set('قسم-كمبكتور-علي-المقفول','Dep8ExitTime');
+departmentsExitTime.set('قسم-تغليف','Dep9ExitTime');
+departmentsExitTime.set('قسم-غسيل-الطباعه','Dep10ExitTime');
+departmentsExitTime.set('قسم-جاهز-للاستلام','Dep11ExitTime');
+
+departmentsEntryTime.set('قسم-الفرد','Dep1EntryTime');
+departmentsEntryTime.set('قسم-الرام-تثبيت','Dep2EntryTime');
+departmentsEntryTime.set('قسم-الرام-تجهيز','Dep2EntryTime');
+departmentsEntryTime.set('قسم-طباعه','Dep3EntryTime');
+departmentsEntryTime.set('قسم-صباغه','Dep4EntryTime');
+departmentsEntryTime.set('قسم-بوليش','Dep5EntryTime');
+departmentsEntryTime.set('قسم-كستره','Dep6EntryTime');
+departmentsEntryTime.set('قسم-كمبكتور-علي-المفتوح','Dep7EntryTime');
+departmentsEntryTime.set('قسم-كمبكتور-علي-المقفول','Dep8EntryTime');
+departmentsEntryTime.set('قسم-تغليف','Dep9EntryTime');
+departmentsEntryTime.set('قسم-غسيل-الطباعه','Dep10EntryTime');
+departmentsEntryTime.set('قسم-جاهز-للاستلام','Dep11EntryTime');
+
+
+
 router.post('/DepartmentRedirection',async (req,res)=>{
     // To get the visitedDeps value;
     console.log("i am here");
@@ -1243,7 +1262,6 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             mediumRequired:0,
             widthRequired:0,
             machineNo:0,
-            inchNo:0
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{'}]/g,'  ');
@@ -1261,13 +1279,35 @@ router.post('/DepartmentRedirection',async (req,res)=>{
     })
 
     // Update its values
-    //let depNoSpaces = docsArr2[1].replace(/ /g, '');
     let No = parseInt(DepNo[0][4]);
     No++;
+    console.log(No);
+    //let depNoSpaces = docsArr2[1].replace(/ /g, '');
     let x = docsArr2[5];
     //console.log("1  " + docsArr2[5] +"  2  " + docsArr2[6] +" 3  " + docsArr2[7] + "  4  " + docsArr2[8]  )
     x = x.replace(/^\s+|\s+$/gm,'');
+    console.log(x);
     console.log(orderDep);
+
+    let obj ={};
+    let obj2={};
+    obj[departmentsExitTime.get(currentDep).toString()] = new Date().toLocaleString({timeZone: 'Africa/Cairo'});
+    obj2[departmentsEntryTime.get(orderDep).toString()] = new Date().toLocaleString({timeZone: 'Africa/Cairo'});
+
+    try {
+        await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
+        await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj2});
+        await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
+            'currentDepartment': orderDep,
+            'visitedDeps':  `[${x}] → `+`[${orderDep}]`,
+            'DepNo':No
+        });
+        console.log('order updated');
+    } catch (err) {
+        throw err;
+    }
+
+/*
     if(orderDep === "قسم-الفرد") {
         if(currentDep === "قسم-الرام") {
             try {
@@ -1285,7 +1325,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
                 throw err;
             }
         }
-        else if(currentDep === "قسم-طباعه'") {
+        else if(currentDep === "قسم-طباعه") {
             try {
                 await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                     $set: {
@@ -3065,6 +3105,9 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             }
         }
     }
+    */
+
+
     console.log(currentDep);
     let depHolder;
     if(currentDep === "قسم-الفرد")
