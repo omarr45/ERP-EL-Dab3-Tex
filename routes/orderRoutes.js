@@ -140,11 +140,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString({timeZone: 'Africa/Cairo'}),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep1: true,
                 visitedDeps: orderDep,
-                Dep1EntryTime: new Date().toLocaleString(),
+                Dep1EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 1,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -168,11 +168,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:'قسم-الرام',
                 Dep2: true,
                 visitedDeps: 'قسم-الرام',
-                Dep2EntryTime: new Date().toLocaleString(),
+                Dep2EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 2,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -195,11 +195,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep3: true,
                 visitedDeps: orderDep,
-                Dep3EntryTime: new Date().toLocaleString(),
+                Dep3EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 3,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -224,11 +224,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep4: true,
                 visitedDeps: orderDep,
-                Dep4EntryTime: new Date().toLocaleString(),
+                Dep4EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 4,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -253,11 +253,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep5: true,
                 visitedDeps: orderDep,
-                Dep5EntryTime: new Date().toLocaleString(),
+                Dep5EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 5,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -282,11 +282,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep6: true,
                 visitedDeps: orderDep,
-                Dep6EntryTime: new Date().toLocaleString(),
+                Dep6EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 6,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -311,11 +311,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep7: true,
                 visitedDeps: orderDep,
-                Dep7EntryTime: new Date().toLocaleString(),
+                Dep7EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 7,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -340,11 +340,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep8: true,
                 visitedDeps: orderDep,
-                Dep8EntryTime: new Date().toLocaleString(),
+                Dep8EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 8,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -369,11 +369,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep9: true,
                 visitedDeps: orderDep,
-                Dep9EntryTime: new Date().toLocaleString(),
+                Dep9EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 9,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -398,11 +398,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep10: true,
                 visitedDeps: orderDep,
-                Dep10EntryTime: new Date().toLocaleString(),
+                Dep10EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 10,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -427,11 +427,11 @@ router.post('/addOrder',async (req,res)=>{
             const newOrder = await new Orders({
                 orderNo,
                 type: orderType,
-                time: new Date().toLocaleString(),
+                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 currentDepartment:orderDep,
                 Dep10: true,
                 visitedDeps: orderDep,
-                Dep11EntryTime: new Date().toLocaleString(),
+                Dep11EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
                 DepNo: 11,
                 redirectionType:flexRadioDefault,
                 clientName,
@@ -1291,8 +1291,8 @@ router.post('/DepartmentRedirection',async (req,res)=>{
 
     let obj ={};
     let obj2={};
-    obj[departmentsExitTime.get(currentDep).toString()] = new Date().toLocaleString({timeZone: 'Africa/Cairo'});
-    obj2[departmentsEntryTime.get(orderDep).toString()] = new Date().toLocaleString({timeZone: 'Africa/Cairo'});
+    obj[departmentsExitTime.get(currentDep).toString()] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
+    obj2[departmentsEntryTime.get(orderDep).toString()] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
 
     try {
         await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
