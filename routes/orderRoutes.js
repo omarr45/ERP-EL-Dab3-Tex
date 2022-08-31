@@ -550,7 +550,7 @@ router.get('/Dep1', async (req,res)=>{
         })
     })
     console.log(docs);
-   // console.log(docs[0].graphNo);
+    console.log(docs[0].graphNo);
     res.render(dir+'views/Dep1.ejs',{records:docs});
 })
 
