@@ -8,13 +8,13 @@
     <title>El Dab3 Tex</title>
 </head>
 <body>
-<h3>الاوردرات الخاصه بقسم بوليش</h3>
+<h3>الاوردرات الخاصه بقسم وبريات</h3>
 <h3> <a style="text-decoration: none; color: white" href="/logout">تسجيل الخروج</a> </h3>
 <label for="exampleDataList" class="form-label">ابحث</label>
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>
-    <%if(records[i].currentDepartment==="قسم-بوليش"){%>
+    <%if(records[i].currentDepartment==="قسم-وبريات"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title currentDep">رقم الكارت : <%= records[i].orderNo %></h5>
@@ -46,7 +46,6 @@
                         <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
                         <option value="قسم-طباعه">قسم طباعه</option>
                         <option value="قسم-صباغه">قسم صباغه</option>
-                        <option value="قسم-كستره">قسم كستره</option>
                         <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
                         <option value="قسم-كمبكتور-علي-المقفول">قسم كمبكتور علي القفول</option>
                         <option value="قسم-تغليف">قسم تغليف</option>
@@ -64,8 +63,8 @@
 <div class="horizontal-line"></div>
 <h3>حركه التشغيل الخاصه بالمصنع</h3>
 <div class="orders-box">
-    <% let arr = ['قسم-الفرد','قسم-الرام-تثبيت','قسم-الرام-تجهيز', 'قسم-طباعه', 'قسم-صباغه', 'قسم-كستره','قسم-كمبكتور-علي-المفتوح','قسم-كمبكتور-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
-    <%for(let j = 0 ;j<=10;j++){%>
+    <% let arr = ['قسم-الفرد','قسم-الرام-تثبيت','قسم-الرام-تجهيز', 'قسم-طباعه', 'قسم-صباغه','قسم-كمبكتور-علي-المفتوح','قسم-كمبكتور-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
+    <%for(let j = 0 ;j<=9;j++){%>
         <div class="horizontal-line" style="color: white; text-align: center; font-size: 30px"><%= arr[j] %></div>
         <%if(arr[j] === "قسم-الرام-تجهيز"){%>
         <%for(let i = 0 ;i<records.length;i++){%>

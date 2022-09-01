@@ -279,7 +279,7 @@ router.post('/addOrder',async (req,res)=>{
             res.render('Login',errorsOrder);
         }
     }
-    else if(orderDep==="قسم-بوليش") {
+    else if(orderDep==="قسم-وبريات") {
         try {
             const newOrder = await new Orders({
                 orderNo,
@@ -765,7 +765,7 @@ router.get('/Dep5', async (req,res)=>{
 
 // Dep6  = كستره
 
-router.get('/Dep6', async (req,res)=>{
+/*router.get('/Dep6', async (req,res)=>{
     let docs;
     let docsArr = [];
     try {
@@ -804,7 +804,7 @@ router.get('/Dep6', async (req,res)=>{
         })
     })
     res.render(dir+'views/Dep6.ejs',{records:docs});
-})
+})*/
 
 
 // Dep7  = كومبكتور علي المفتوح
@@ -1167,7 +1167,8 @@ departmentsExitTime.set('قسم-الرام-تثبيت','Dep2ExitTime');
 departmentsExitTime.set('قسم-الرام-تجهيز','Dep2ExitTime');
 departmentsExitTime.set('قسم-طباعه','Dep3ExitTime');
 departmentsExitTime.set('قسم-صباغه','Dep4ExitTime');
-departmentsExitTime.set('قسم-بوليش','Dep5ExitTime');
+departmentsExitTime.set('قسم-صباغه','Dep4ExitTime');
+departmentsExitTime.set('قسم-وبريات','Dep5ExitTime');
 departmentsExitTime.set('قسم-كستره','Dep6ExitTime');
 departmentsExitTime.set('قسم-كمبكتور-علي-المفتوح','Dep7ExitTime');
 departmentsExitTime.set('قسم-كمبكتور-علي-المقفول','Dep8ExitTime');
@@ -1180,7 +1181,7 @@ departmentsEntryTime.set('قسم-الرام-تثبيت','Dep2EntryTime');
 departmentsEntryTime.set('قسم-الرام-تجهيز','Dep2EntryTime');
 departmentsEntryTime.set('قسم-طباعه','Dep3EntryTime');
 departmentsEntryTime.set('قسم-صباغه','Dep4EntryTime');
-departmentsEntryTime.set('قسم-بوليش','Dep5EntryTime');
+departmentsExitTime.set('قسم-وبريات','Dep5EntryTime');
 departmentsEntryTime.set('قسم-كستره','Dep6EntryTime');
 departmentsEntryTime.set('قسم-كمبكتور-علي-المفتوح','Dep7EntryTime');
 departmentsEntryTime.set('قسم-كمبكتور-علي-المقفول','Dep8EntryTime');
