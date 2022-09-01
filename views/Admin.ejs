@@ -22,7 +22,7 @@
             <%if(records[i].currentDepartment === arr[j]){%>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                        <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
                         <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                         <%if(records[i].redirectionType==="طباعه"){%>
                             <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
@@ -36,7 +36,7 @@
                         <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                         <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                         <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                        <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                        <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
                         <%if(records[i].currentDepartment=== "قسم-الرام"  && records[i].Dep2Type === 1){%>
                             <p class="card-text">النوع : تثبيت</p>
                         <%}%>
@@ -44,7 +44,7 @@
                             <p class="card-text">النوع : تجهيز</p>
                         <%}%>
                         <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
-                        <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
+                        <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
                         <div class="visited-deps">
                             <details>
                                 <summary><h4> الاقسام التي تم زيارتها </h4></summary>

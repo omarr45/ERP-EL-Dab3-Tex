@@ -68,7 +68,7 @@
     <%if(records[i].currentDepartment==="قسم-الرام"  && records[i].Dep2Type === 2){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">رقم الكارت : <%= records[i].orderNo %></h5>
+                <h5 class="card-title currentDep">رقم الكارت : <%= records[i].orderNo %></h5>
                 <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <%if(records[i].redirectionType==="طباعه"){%>
                     <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
@@ -82,7 +82,7 @@
                 <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
                 <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
                 <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
                 <form class="order-form" method="post" action="/DepartmentRedirection">
@@ -118,7 +118,7 @@
     <%if(records[i].currentDepartment!=="قسم-الرام"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">رقم الاوردر : <%= records[i].orderNo %></h5>
+                <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
                 <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
                 <%if(records[i].redirectionType==="طباعه"){%>
                     <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
@@ -133,7 +133,7 @@
                 <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
                 <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
                 <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
                 <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
             </div>
