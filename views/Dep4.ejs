@@ -47,7 +47,7 @@
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <label for="exampleDataList" class="form-label">توجيه</label>
-                    <input name="orderDep" class="form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                    <input oninput="sel()" name="orderDep" class="form-control Dep2Type-input list" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
                     <datalist id="datalistOptions">
                         <option value="قسم-الفرد">قسم الفرد</option>
                         <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
@@ -61,6 +61,7 @@
                         <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
                         <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
                     </datalist>
+                    <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
                     <button style="margin: 10px; " class="btn btn-outline-primary submit" type="submit" >Redirect</button>
                 </form>
             </div>

@@ -1311,20 +1311,52 @@ router.post('/DepartmentRedirection',async (req,res)=>{
     let obj2={};
     obj[departmentsExitTime.get(currentDep)] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
     obj2[departmentsEntryTime.get(orderDep)] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
-
-    try {
-        await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
-        await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj2});
-        await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
-            'currentDepartment': orderDep,
-            'visitedDeps':  `[${x}] → `+`[${orderDep}]`,
-            'DepNo':No
-        });
-        console.log('order updated');
-    } catch (err) {
-        res.redirect('/');
+    if(orderDep ==='قسم-الرام-تثبيت'){
+        const name = "قسم-الرام";
+        try {
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj2});
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
+                'currentDepartment': name,
+                'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
+                'DepNo': No,
+                'Dep2Type':1
+            });
+            console.log('order updated');
+        } catch (err) {
+            res.redirect('/');
+        }
     }
-
+    else if(orderDep ==='قسم-الرام-تجهيز'){
+        const name = "قسم-الرام";
+        try {
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj2});
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
+                'currentDepartment': name,
+                'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
+                'DepNo': No,
+                'Dep2Type':2
+            });
+            console.log('order updated');
+        } catch (err) {
+            res.redirect('/');
+        }
+    }
+    else {
+        try {
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj2});
+            await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
+                'currentDepartment': orderDep,
+                'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
+                'DepNo': No
+            });
+            console.log('order updated');
+        } catch (err) {
+            res.redirect('/');
+        }
+    }
 /*
     if(orderDep === "قسم-الفرد") {
         if(currentDep === "قسم-الرام") {

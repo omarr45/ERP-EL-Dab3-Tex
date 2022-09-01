@@ -3,6 +3,20 @@ const cards = document.querySelectorAll('.card');
 const orderBox = document.querySelector('.orders-box');
 const ordersHolder = orders[0].innerHTML;
 
+const Dep2Type = document.querySelector('.Dep2Type');
+const Dep2TypeInput = document.querySelector('.Dep2Type-input');
+
+
+
+const sel = () =>{
+    if(Dep2TypeInput.value === 'قسم-الرام-تثبيت'){
+        Dep2Type.value = 1;
+    }
+    else if (Dep2TypeInput.value === 'قسم-الرام-تجهيز')
+        Dep2Type.value = 2;
+}
+
+
 search = () =>{
     const searchInput = document.querySelector('.form-label-css');
     for(let i = 0 ;i<cards.length;i++) {
