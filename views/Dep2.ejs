@@ -115,32 +115,36 @@
 <div class="horizontal-line"></div>
 <h3>حركه التشغيل الخاصه بالمصنع</h3>
 <div class="orders-box">
-    <%for(let i = 0 ;i<records.length;i++){%>
-    <%if(records[i].currentDepartment!=="قسم-الرام"){%>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
-                <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
-                <%if(records[i].redirectionType==="طباعه"){%>
-                    <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
-                <%}%>
-                <%if(records[i].redirectionType==="سباغه"){%>
-                    <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
-                <%}%>
-                <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
-                <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                <p class="card-text">رقم البوصه :  <%= records[i].inchNo %> </p>
-                <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
-                <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
-                <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
-                <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
-                <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
-                <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
-            </div>
-        </div>
+    <% let arr = ['قسم-الفرد', 'قسم-طباعه', 'قسم-صباغه', 'قسم-بوليش', 'قسم-كستره','قسم-كمبكتور-علي-المفتوح','قسم-كمبكتور-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
+    <%for(let j = 0 ;j<=10;j++){%>
+        <div class="horizontal-line" style="color: white; text-align: center; font-size: 30px"><%= arr[j] %></div>
+        <%for(let i = 0 ;i<records.length;i++){%>
+            <%if(records[i].currentDepartment === arr[j]){%>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
+                        <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                        <%if(records[i].redirectionType==="طباعه"){%>
+                            <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                        <%}%>
+                        <%if(records[i].redirectionType==="سباغه"){%>
+                            <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
+                        <%}%>
+                        <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                        <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                        <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                        <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
+                        <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
+                        <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
+                        <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                        <p class="card-text">النوع : تثبيت</p>
+                        <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
+                        <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
+                    </div>
+                </div>
+            <%} %>
+        <%}%>
     <%}%>
-    <%} %>
 </div>
 <script src="/js/Dep2.js"></script>
 <script src="/js/search.js"></script>
