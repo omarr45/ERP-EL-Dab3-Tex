@@ -15,7 +15,7 @@
 <form action="/addOrder" method="POST" class="order-from">
     <h1>قسم مخزن الخام</h1>
     <div class="form-check">
-        <input class="form-check-input" value="طباعه" type="radio" name="flexRadioDefault" id="Teba3a">
+        <input class="form-check-input" value="طباعه" type="radio" name="flexRadioDefault" id="Teba3a" required>
         <label class="form-check-label" for="Teba3a">
             طباعه
         </label>
@@ -37,11 +37,11 @@
     </div>
     <div class="input-group input-group-sm mb-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">المتوسط المطلوب</span>
-        <input type="number" class="form-control" name="mediumRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+        <input type="number" step=".001" class="form-control" name="mediumRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
     </div>
     <div class="input-group input-group-sm mb-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">العرض المطلوب</span>
-        <input type="number" class="form-control" name="widthRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+        <input type="number" step=".001" class="form-control" name="widthRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
     </div>
     <div class="form-check">
         <input class="form-check-input" value="دائري" type="radio" name="flexRadioDefault2" id="circular">

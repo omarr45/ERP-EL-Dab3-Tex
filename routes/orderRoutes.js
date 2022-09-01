@@ -1209,7 +1209,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             DepNo.push(docHolder.split(':'));
         })
     }
-    catch (err){throw err}
+    catch (err){res.redirect('/');}
 
     // to get visited deps
     try {
@@ -1268,7 +1268,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             docsArr.push(docHolder.split(':'));
         })
     }//13 => 15
-    catch (err){throw err}
+    catch (err){res.redirect('/');}
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -1291,8 +1291,8 @@ router.post('/DepartmentRedirection',async (req,res)=>{
 
     let obj ={};
     let obj2={};
-    obj[departmentsExitTime.get(currentDep).toString()] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
-    obj2[departmentsEntryTime.get(orderDep).toString()] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
+    obj[departmentsExitTime.get(currentDep)] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
+    obj2[departmentsEntryTime.get(orderDep)] = new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'});
 
     try {
         await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
@@ -1304,7 +1304,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
         });
         console.log('order updated');
     } catch (err) {
-        throw err;
+        res.redirect('/');
     }
 
 /*

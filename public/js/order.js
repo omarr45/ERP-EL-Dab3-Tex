@@ -7,6 +7,8 @@ const Seba8a = document.querySelectorAll('.requiredColor');
 const Dep2Type = document.querySelector('.Dep2Type');
 const Dep2TypeInput = document.querySelector('.Dep2Type-input');
 
+
+
 const sel = () =>{
    if(Dep2TypeInput.value === 'قسم-الرام-تثبيت'){
       Dep2Type.value = 1;
@@ -26,6 +28,7 @@ radioTeba3a.addEventListener('click',()=>{
    Seba8a[1].style.display="none";
    Teba3a[0].style.display="block";
    Teba3a[1].style.display="block";
+
 })
 radioSeba8a.addEventListener('click',()=>{
 
