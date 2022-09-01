@@ -3196,10 +3196,8 @@ router.post('/DepartmentRedirection',async (req,res)=>{
         depHolder="Dep3";
     else if(currentDep === "قسم-صباغه")
         depHolder="Dep4";
-    else if(currentDep === "قسم-بوليش")
+    else if(currentDep === "قسم-وبريات")
         depHolder="Dep5";
-    else if(currentDep === "قسم-كستره")
-        depHolder="Dep6";
     else if(currentDep === "قسم-كمبكتور-علي-المفتوح")
         depHolder="Dep7";
     else if(currentDep === "قسم-كمبكتور-علي-المقفول")
