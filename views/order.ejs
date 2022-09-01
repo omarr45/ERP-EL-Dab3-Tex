@@ -178,7 +178,7 @@
                     <p class="card-text">النوع : تجهيز</p>
                 <%}%>
                 <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
-                <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
+                <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
                 <form action="/DeleteOrder" method="POST" class="order-from">
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <input name="page" style="display:none;" value="order">

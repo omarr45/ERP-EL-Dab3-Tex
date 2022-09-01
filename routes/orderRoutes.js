@@ -8,6 +8,24 @@ let LocalStorage = require('node-localstorage').LocalStorage;
 let dir = __dirname.replace('routes','');
 localStorage = new LocalStorage('./scratch');
 
+
+
+router.get('/arr',async (req,res)=>{
+    try {
+        const res2 =  await Orders.updateOne({ 'datalist':true },{'$set' : {"options":2}});
+       /* const res = await Orders.updateOne(
+            {_id: "6310894642faea24e735caae"},
+            {$push: {options: "NEW_COMMENT"}}
+        )*/
+    }
+    catch(err){
+        console.log("error");
+    }
+    console.log("done");
+    res.redirect('/');
+});
+
+
 router.get('/',async(req,res)=>{
     let docs;
     let docsArr = [];

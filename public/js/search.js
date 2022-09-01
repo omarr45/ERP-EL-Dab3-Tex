@@ -2,6 +2,7 @@ const orders = document.querySelectorAll('.orders-box');
 const cards = document.querySelectorAll('.card');
 const orderBox = document.querySelector('.orders-box');
 const ordersHolder = orders[0].innerHTML;
+
 search = () =>{
     const searchInput = document.querySelector('.form-label-css');
     for(let i = 0 ;i<cards.length;i++) {

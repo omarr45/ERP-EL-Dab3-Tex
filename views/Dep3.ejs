@@ -41,7 +41,7 @@
                 <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
                 <p class="card-text">القسم الحالي :  <%= records[i].currentDepartment %></p>
                 <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
-                <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
+                <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
                 <form class="order-form" method="post" action="/DepartmentRedirection">
                     <input name="currentDep" style="display:none;" value="<%=records[i].currentDepartment%>">
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
@@ -97,7 +97,7 @@
                     <p class="card-text">النوع : تجهيز</p>
                 <%}%>
                 <p class="card-text">اسم العميل :  <%= records[i].clientName %></p>
-                <p class="card-text">ملاحظات :  <%= records[i].Notes %></p>
+                <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
             </div>
         </div>
     <%}%>
