@@ -169,374 +169,321 @@ router.post('/addOrder',async (req,res)=>{
         flexRadioDefault2, mediumRequired, widthRequired, machineNo } = req.body;
     if(ordersMap.has(orderNo)){
         errorsOrder.push("هناك اوردر بنفس هذا الرقم من قبل")
-        console.log("what is");
-        let docs;
-        let docsArr = [];
-        let options = []
-        try {
-            docs = await Orders.find({email:false},{_id:0,
-                time:1,
-                orderNo: 1,
-                type: 1,
-                currentDepartment:1,
-                clientName:1,
-                Notes:1,
-                redirectionType:1,
-                graphNo:1,
-                requiredColor:1,
-                Dep2Type:1,
-                textureType:1,
-                mediumRequired:1,
-                widthRequired:1,
-                machineNo:1
-            });
-            docs.forEach(doc=>{
-                let docHolder = doc.toString().replace(/[{',}]/g,'  ');
-                docsArr.push(docHolder.split(' '));
-            })
-        }
-        catch (err){console.log("errorr mesh 3aref eh")}
-        let docsArr2 = [];
-        docsArr.forEach(rec=>{
-            rec.forEach(re=>{
-                if(re!=''){
-                    docsArr2.push(re);
-                }
-            })
-        })
-        try{
-            options = await Orders.find({email:"yasser@gmail.com"},{optionList:1});
-        }
-        catch (err){
-            console.log("hena error el options");
-        }
-        for(let k = 0 ;k<docs.length;k++){
-            ordersMap.set(docs[k].orderNo,"1");
-        }
-        res.render(dir+'/views/order.ejs',{records:docs,errorsOrder:errorsOrder,successOrder:successOrder,options:options[0].optionList});
-        successOrder = [];
-        errorsOrder = [];
+        res.redirect('/');
     }
-    console.log(orderDep+" "+flexRadioDefault + "  " + Dep2Type);
-    if(orderDep==="قسم-الفرد") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep1: true,
-                visitedDeps: orderDep,
-                Dep1EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 1,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-الرام-تثبيت" || orderDep==="قسم-الرام-تجهيز") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:'قسم-الرام',
-                Dep2: true,
-                visitedDeps: 'قسم-الرام',
-                Dep2EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 2,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);        }
-    }
-    else if(orderDep==="قسم-طباعه") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep3: true,
-                visitedDeps: orderDep,
-                Dep3EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 3,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+    else {
+        console.log(orderDep + " " + flexRadioDefault + "  " + Dep2Type);
+        if (orderDep === "قسم-الفرد") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep1: true,
+                    visitedDeps: orderDep,
+                    Dep1EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 1,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-الرام-تثبيت" || orderDep === "قسم-الرام-تجهيز") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: 'قسم-الرام',
+                    Dep2: true,
+                    visitedDeps: 'قسم-الرام',
+                    Dep2EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 2,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-طباعه") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep3: true,
+                    visitedDeps: orderDep,
+                    Dep3EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 3,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-صباغه") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep4: true,
-                visitedDeps: orderDep,
-                Dep4EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 4,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-صباغه") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep4: true,
+                    visitedDeps: orderDep,
+                    Dep4EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 4,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-وبريات") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep5: true,
-                visitedDeps: orderDep,
-                Dep5EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 5,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-وبريات") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep5: true,
+                    visitedDeps: orderDep,
+                    Dep5EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 5,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-كستره") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep6: true,
-                visitedDeps: orderDep,
-                Dep6EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 6,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-كستره") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep6: true,
+                    visitedDeps: orderDep,
+                    Dep6EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 6,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-كمبكتور-علي-المفتوح") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep7: true,
-                visitedDeps: orderDep,
-                Dep7EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 7,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-كمبكتور-علي-المفتوح") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep7: true,
+                    visitedDeps: orderDep,
+                    Dep7EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 7,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-كمبكتور-علي-المقفول") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep8: true,
-                visitedDeps: orderDep,
-                Dep8EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 8,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-كمبكتور-علي-المقفول") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep8: true,
+                    visitedDeps: orderDep,
+                    Dep8EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 8,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-تغليف") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep9: true,
-                visitedDeps: orderDep,
-                Dep9EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 9,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-تغليف") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep9: true,
+                    visitedDeps: orderDep,
+                    Dep9EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 9,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-غسيل-الطباعه") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep10: true,
-                visitedDeps: orderDep,
-                Dep10EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 10,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-غسيل-الطباعه") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep10: true,
+                    visitedDeps: orderDep,
+                    Dep10EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 10,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
-        }
-    }
-    else if(orderDep==="قسم-جاهز-للاستلام") {
-        try {
-            const newOrder = await new Orders({
-                orderNo,
-                type: orderType,
-                time: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                currentDepartment:orderDep,
-                Dep10: true,
-                visitedDeps: orderDep,
-                Dep11EntryTime: new Date().toLocaleString('en-EG',{timeZone: 'Africa/Cairo'}),
-                DepNo: 11,
-                redirectionType:flexRadioDefault,
-                clientName,
-                Notes,
-                graphNo,
-                requiredColor,
-                Dep2Type,
-                textureType:flexRadioDefault2,
-                mediumRequired,
-                widthRequired,
-                machineNo
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
+        } else if (orderDep === "قسم-جاهز-للاستلام") {
+            try {
+                const newOrder = await new Orders({
+                    orderNo,
+                    type: orderType,
+                    time: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    currentDepartment: orderDep,
+                    Dep10: true,
+                    visitedDeps: orderDep,
+                    Dep11EntryTime: new Date().toLocaleString('en-EG', {timeZone: 'Africa/Cairo'}),
+                    DepNo: 11,
+                    redirectionType: flexRadioDefault,
+                    clientName,
+                    Notes,
+                    graphNo,
+                    requiredColor,
+                    Dep2Type,
+                    textureType: flexRadioDefault2,
+                    mediumRequired,
+                    widthRequired,
+                    machineNo
 
-            })
-            newOrder.save();
-        } catch (err) {
-            errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
-            res.render('Login',errorsOrder);
+                })
+                newOrder.save();
+            } catch (err) {
+                errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
+                res.render('Login', errorsOrder);
+            }
         }
+        console.log("new order saved");
+        successOrder.push("تم اضافه الاوردر بنجاح");
+        res.redirect('/');
     }
-    console.log("new order saved");
-    successOrder.push("تم اضافه الاوردر بنجاح");
-    res.redirect('/');
 })
 
 //Login Route
