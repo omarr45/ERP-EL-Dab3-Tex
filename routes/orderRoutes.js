@@ -53,10 +53,8 @@ router.get('/',async(req,res)=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
-
-         options = await Orders.find({email:"yasser@gmail.com"},{optionList:1});
     }
-    catch (err){throw err}
+    catch (err){console.log("errorr mesh 3aref eh")}
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -65,11 +63,18 @@ router.get('/',async(req,res)=>{
             }
         })
     })
+    try{
+        options = await Orders.find({email:"yasser@gmail.com"},{optionList:1});
+    }
+    catch (err){
+        console.log("hena error el options");
+    }
     for(let k = 0 ;k<docs.length;k++){
         ordersMap.set(docs[k].orderNo,"1");
     }
     res.render(dir+'/views/order.ejs',{records:docs,errorsOrder:errorsOrder,successOrder:successOrder,options:options[0].optionList});
     successOrder = [];
+    errorsOrder = [];
 })
 
 // Delete order Route
@@ -159,11 +164,58 @@ let errorsOrder = []
 let errors = [];
 router.post('/addOrder',async (req,res)=>{
     errorsOrder = []
+    let options;
     const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor, Dep2Type,
         flexRadioDefault2, mediumRequired, widthRequired, machineNo } = req.body;
     if(ordersMap.has(orderNo)){
         errorsOrder.push("هناك اوردر بنفس هذا الرقم من قبل")
-        res.render(dir+'/views/order.ejs',{error:errorsOrder});
+        console.log("what is");
+        let docs;
+        let docsArr = [];
+        let options = []
+        try {
+            docs = await Orders.find({email:false},{_id:0,
+                time:1,
+                orderNo: 1,
+                type: 1,
+                currentDepartment:1,
+                clientName:1,
+                Notes:1,
+                redirectionType:1,
+                graphNo:1,
+                requiredColor:1,
+                Dep2Type:1,
+                textureType:1,
+                mediumRequired:1,
+                widthRequired:1,
+                machineNo:1
+            });
+            docs.forEach(doc=>{
+                let docHolder = doc.toString().replace(/[{',}]/g,'  ');
+                docsArr.push(docHolder.split(' '));
+            })
+        }
+        catch (err){console.log("errorr mesh 3aref eh")}
+        let docsArr2 = [];
+        docsArr.forEach(rec=>{
+            rec.forEach(re=>{
+                if(re!=''){
+                    docsArr2.push(re);
+                }
+            })
+        })
+        try{
+            options = await Orders.find({email:"yasser@gmail.com"},{optionList:1});
+        }
+        catch (err){
+            console.log("hena error el options");
+        }
+        for(let k = 0 ;k<docs.length;k++){
+            ordersMap.set(docs[k].orderNo,"1");
+        }
+        res.render(dir+'/views/order.ejs',{records:docs,errorsOrder:errorsOrder,successOrder:successOrder,options:options[0].optionList});
+        successOrder = [];
+        errorsOrder = [];
     }
     console.log(orderDep+" "+flexRadioDefault + "  " + Dep2Type);
     if(orderDep==="قسم-الفرد") {
