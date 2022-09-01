@@ -204,6 +204,10 @@ const OrderSchema = new mongoose.Schema({
     DepNo:{
         type:Number,
         default:false
+    },
+    optionList:{
+        type:Array,
+        default:false
     }
 });
 

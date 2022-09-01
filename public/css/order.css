@@ -4,6 +4,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 .test{
     color: red;
@@ -17,4 +18,14 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.error{
+    font-size : 20px;
+    padding: 20px;
+    border-radius: 20px;
+}
+.success{
+    font-size : 20px;
+    padding: 20px;
+    border-radius: 20px;
 }

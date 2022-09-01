@@ -12,8 +12,16 @@
     <title>El Dab3 Tex</title>
 </head>
 <body>
-<form action="/addOrder" method="POST" class="order-from">
+<form action="/addOrder" method="POST" class="order-from mb-3">
     <h1>قسم مخزن الخام</h1>
+    <br>
+    <div class="error alert-danger" role="alert">
+        <%= errorsOrder %>
+    </div>
+    <div class="success alert-success" role="alert">
+        <%= successOrder %>
+    </div>
+    <br>
     <div class="form-check">
         <input class="form-check-input" value="طباعه" type="radio" name="flexRadioDefault" id="Teba3a" required>
         <label class="form-check-label" for="Teba3a">
@@ -66,91 +74,44 @@
         <label for="exampleDataList2" class="form-label">نوع الاوردر</label>
         <input name="orderType" class="form-control  list2" list="datalistOptions2" id="exampleDataList2" placeholder="Type to search..." required>
         <datalist id="datalistOptions2">
-            <option value="قطيفه-هايدي-مطبوع">قطيفه-هايدي-مطبوع</option>
-            <option value="قطيفه-هايدي-مطبوع-وشين">قطيفه-هايدي-مطبوع-وشين</option>
-            <option value="قطيفه-هايدي-ساده-وشين">قطيفه-هايدي-ساده-وشين</option>
-            <option value="قطيفه-هايدي-ساده-وش-واحد">قطيفه-هايدي-ساده-وش-واحد</option>
-            <option value="قطيفه-هايدي-ساده-وش-حفر">قطيفه-هايدي-ساده-حفر</option>
-            <option value="قطيفه-هايدي-بندكس-قطن">قطيفه-هايدي-بندكس-قطن</option>
-            <option value="قطيفه-هايدي-بندكس-مؤنث">قطيفه-هايدي-بندكس-مؤنث</option>
-            <option value="قطيفه-بولستر">قطيفه-بولستر</option>
-            <option value="قطيفه-فرنساوي">قطيفه-فرنساوي</option>
-            <option value="روزيتا">روزيتا</option>
-            <option value="فانله شعرات">فانله-شعرات</option>
-            <option value="فانله">فانله</option>
-            <option value="اسكوبا">اسكوبا</option>
-            <option value="اسكوبا-اسبنسر">اسكوبا-اسبنسر</option>
-            <option value="اسكوبا-شعيرات">اسكوبا-شعيرات</option>
-            <option value="اسكوبا-مطبوع">اسكوبا-مطبوع</option>
-            <option value="اسكوبا">اسكوبا</option>
-            <option value="بيورهاف-ليكرا-علي-المقفول">بيور-هاف-ليكرا-علي-المقفول</option>
-            <option value="سنجل ليكرا-قطن-ساده">سنجل-ليكرا-قطن-ساده</option>
-            <option value="سنجل ليكرا-قطن-مطبوع">سنجل-ليكرا-قطن-مطبوع</option>
-            <option value="سنجل-قطن">سنجل-قطن</option>
-            <option value="شعيرات-ثقيل-ساده">شعيرات-ثقيل-ساده</option>
-            <option value="شعيرات-خفيف-ساده">شعيرات-خفيف-ساده</option>
-            <option value=" مطبوع-شعيرات">شعيرات-مطبوع</option>
-            <option value="شعيرات-بيتش-مطبوع">شعيرات-بيتش-مطبوع</option>
-            <option value="فايبر-مطبوع">فايبر-مطبوع</option>
-            <option value="فايبر-بيتش-مطبوع">فايبر-بيتش-مطبوع</option>
-            <option value="فايبر-ساده">فايبر-ساده</option>
-            <option value="فايبر-بيتش-ساده">فايبر-بيتش-ساده</option>
-            <option value="اسبن-مطبوع">اسبن-مطبوع</option>
-            <option value="اسبن-ساده">اسبن-ساده</option>
-            <option value="بوركيني">بوركيني</option>
-            <option value="كوت">كوت</option>
-            <option value="زبده-ساده">زبده-ساده</option>
-            <option value="زبده-مطبوع">زبده-مطبوع</option>
-            <option value="موهير-ساده">موهير-ساده</option>
-            <option value="موهير-مطبوع">موهير-مطبوع</option>
-            <option value="شعيرات-مايوه">شعيرات-مايوه</option>
-            <option value="بوركيني">بوركيني-(الصنف\مايوه)</option>
-            <option value="مايوه-ميامي">مايوه-ميامي</option>
-            <option value="دفايه-شعيرات-مطبوع">دفايه-شعيرات-مطبوع</option>
-            <option value="دفايه-شعيرات-مطبوع-بيتش">دفايه-شعيرات-مطبوع-بيتش</option>
-            <option value="دفايه-شعيرات-ساده">دفايه-شعيرات-ساده</option>
-            <option value="دفايه شعيرات-ساده-بيتش">دفايه-شعيرات-ساده-بيتش</option>
-            <option value="فيجا-خفيف">فيجا-خفيف</option>
-            <option value="فيجا-تقيل">فيجا-تقيل</option>
-            <option value="فيجا-اطفال">فيجا-اطفال</option>
-            <option value="ميلتون-اسبن">ميلتون-اسبن</option>
-            <option value="ميلتون-قطن">ميلتون-قطن</option>
-            <option value="ميلتون-اسلب">ميلتون-اسلب</option>
-            <option value="بولار-مطبوع">بولار-مطبوع</option>
-            <option value="بولار-ساده">بولار-ساده</option>
-            <option value="بولار-حفر">بولار-حفر</option>
-            <option value="ميلتون-قطن">ميلتون-قطن</option>
-            <option value="فرو-ثقيل">فرو-ثقيل</option>
-            <option value="براش-بيتش">براش-بيتش</option>
-            <option value="كوريشه">كوريشه</option>
-            <option value="سمر-ميلتون-مبرد">سمر-ميلتون-مبرد</option>
-            <option value="بور-نت">بور-نت</option>
+            <% for(let i = 1 ;i<options.length;i++){%>
+                <option value="<%=options[i]%>"><%=options[i]%></option>
+            <%}%>
         </datalist>
     </div>
-    <label for="exampleDataList" class="form-label">توجيه</label>
-    <input oninput="sel()" name="orderDep" class="Dep2Type-input form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
-    <datalist id="datalistOptions">
-        <option value="قسم-الفرد">قسم الفرد</option>
-        <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
-        <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
-        <option value="قسم-طباعه">قسم طباعه</option>
-        <option value="قسم-صباغه">قسم صباغه</option>
-        <option value="قسم-بوليش">قسم بوليش</option>
-        <option value="قسم-كستره">قسم كستره</option>
-        <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
-        <option value="قسم-كمبكتور-علي-المقفول">قسم كمبكتور علي المقفول</option>
-        <option value="قسم-تغليف">قسم تغليف</option>
-        <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
-        <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
-    </datalist>
-    <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
-    <div class="input-group">
-        <span class="input-group-text">ملاحظات</span>
-        <textarea name="Notes" class="form-control" aria-label="With textarea"></textarea>
+
+    <div class="mb-3">
+        <label for="exampleDataList" class="form-label">توجيه</label>
+        <input oninput="sel()" name="orderDep" class="Dep2Type-input form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
+        <datalist id="datalistOptions">
+            <option value="قسم-الفرد">قسم الفرد</option>
+            <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
+            <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
+            <option value="قسم-طباعه">قسم طباعه</option>
+            <option value="قسم-صباغه">قسم صباغه</option>
+            <option value="قسم-بوليش">قسم بوليش</option>
+            <option value="قسم-كستره">قسم كستره</option>
+            <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
+            <option value="قسم-كمبكتور-علي-المقفول">قسم كمبكتور علي المقفول</option>
+            <option value="قسم-تغليف">قسم تغليف</option>
+            <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
+            <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
+        </datalist>
+        <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
+        <div class="input-group">
+            <span class="input-group-text">ملاحظات</span>
+            <textarea name="Notes" class="form-control" aria-label="With textarea"></textarea>
+        </div>
     </div>
     <button onclick="addOrder()" style="margin: 10px" class="btn btn-primary submit" type="submit" >إضافه الاوردر</button>
-    <%= errorsOrder %>
 </form>
+<div class="mb-3">
+    <form action="/addType" method="POST" class="order-from">
+        <label for="newType"  class="form-label">اضافه نوع جديد</label>
+        <input type="text" class="form-control" id="newType" name="newType" required>
+        <button class="btn btn-primary submit m-3" type="submit"> اضافه</button>
+    </form>
+</div>
 <div class="horizontal-line"></div>
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>

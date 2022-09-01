@@ -9,14 +9,16 @@ let dir = __dirname.replace('routes','');
 localStorage = new LocalStorage('./scratch');
 
 
+const ordersMap = new Map();
+let successOrder = [];
 
 router.get('/arr',async (req,res)=>{
     try {
-        const res2 =  await Orders.updateOne({ 'datalist':true },{'$set' : {"options":2}});
-       /* const res = await Orders.updateOne(
-            {_id: "6310894642faea24e735caae"},
-            {$push: {options: "NEW_COMMENT"}}
-        )*/
+        const res2 =  await Orders.updateOne({ 'email':'yasser@gmail.com' },
+            {$push: {optionList: ["فايبر-ساده","فايبر-بيتش-ساده","اسبن-مطبوع","اسبن-ساده","بوركيني","كوت","زبده-ساده","زبده-مطبوع","موهير-ساده",
+                    "موهير-مطبوع","شعيرات-مايوه","بوركيني","مايوه-ميامي","دفايه-شعيرات-مطبوع","دفايه-شعيرات-مطبوع-بيتش","دفايه-شعيرات-ساده","دفايه شعيرات-ساده-بيتش",
+                    "فيجا-خفيف","فيجا-تقيل","فيجا-اطفال","ميلتون-اسبن","ميلتون-قطن","ميلتون-اسلب","بولار-مطبوع","بولار-ساده","بولار-حفر","ميلتون-قطن",
+                    "فرو-ثقيل","براش-بيتش","كوريشه","سمر-ميلتون-مبرد","بور-نت"]}});
     }
     catch(err){
         console.log("error");
@@ -29,6 +31,7 @@ router.get('/arr',async (req,res)=>{
 router.get('/',async(req,res)=>{
     let docs;
     let docsArr = [];
+    let options = []
     try {
         docs = await Orders.find({email:false},{_id:0,
             time:1,
@@ -50,6 +53,8 @@ router.get('/',async(req,res)=>{
             let docHolder = doc.toString().replace(/[{',}]/g,'  ');
             docsArr.push(docHolder.split(' '));
         })
+
+         options = await Orders.find({email:"yasser@gmail.com"},{optionList:1});
     }
     catch (err){throw err}
     let docsArr2 = [];
@@ -60,7 +65,11 @@ router.get('/',async(req,res)=>{
             }
         })
     })
-    res.render(dir+'/views/order.ejs',{records:docs,errorsOrder:errorsOrder});
+    for(let k = 0 ;k<docs.length;k++){
+        ordersMap.set(docs[k].orderNo,"1");
+    }
+    res.render(dir+'/views/order.ejs',{records:docs,errorsOrder:errorsOrder,successOrder:successOrder,options:options[0].optionList});
+    successOrder = [];
 })
 
 // Delete order Route
@@ -152,6 +161,10 @@ router.post('/addOrder',async (req,res)=>{
     errorsOrder = []
     const {orderNo,orderType,orderDep,flexRadioDefault,clientName,Notes, graphNo , requiredColor, Dep2Type,
         flexRadioDefault2, mediumRequired, widthRequired, machineNo } = req.body;
+    if(ordersMap.has(orderNo)){
+        errorsOrder.push("هناك اوردر بنفس هذا الرقم من قبل")
+        res.render(dir+'/views/order.ejs',{error:errorsOrder});
+    }
     console.log(orderDep+" "+flexRadioDefault + "  " + Dep2Type);
     if(orderDep==="قسم-الفرد") {
         try {
@@ -470,6 +483,7 @@ router.post('/addOrder',async (req,res)=>{
         }
     }
     console.log("new order saved");
+    successOrder.push("تم اضافه الاوردر بنجاح");
     res.redirect('/');
 })
 
@@ -1130,6 +1144,20 @@ router.post('/changeGraphNo',async (req,res)=>{
     }
     res.redirect('/dep3');
 });
+
+router.post('/addType',async (req,res)=>{
+    const {newType} = req.body;
+    try {
+        const res2 =  await Orders.updateOne({ 'email':'yasser@gmail.com' },
+            {$push: {optionList:newType }});
+    }
+    catch(err){
+        console.log("error");
+    }
+    console.log("done");
+    res.redirect('/');
+});
+
 
 
 const departmentsEntryTime = new Map();
