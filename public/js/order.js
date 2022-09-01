@@ -28,6 +28,8 @@ radioTeba3a.addEventListener('click',()=>{
    Seba8a[1].style.display="none";
    Teba3a[0].style.display="block";
    Teba3a[1].style.display="block";
+   Teba3a[1].required = true;
+   Seba8a[1].required=false;
 
 })
 radioSeba8a.addEventListener('click',()=>{
@@ -36,6 +38,8 @@ radioSeba8a.addEventListener('click',()=>{
    Seba8a[1].style.display="block";
    Teba3a[0].style.display="none";
    Teba3a[1].style.display="none";
+   Teba3a[1].required = false;
+   Seba8a[1].required=true;
 })
 
 const addOrder = () =>{
