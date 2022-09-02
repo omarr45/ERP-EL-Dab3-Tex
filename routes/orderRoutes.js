@@ -1208,8 +1208,9 @@ router.post('/try',(req,res)=>{
 router.post('/DepartmentRedirection',async (req,res)=>{
     // To get the visitedDeps value;
     console.log("i am here");
-    const {orderDep,currentDep} = req.body;
-    console.log(orderDep);
+    const {orderDep,currentDep,newNotes} = req.body;
+    console.log("new notes  " + newNotes);
+    console.log("New department   " + orderDep);
     let docs;
     let docsArr = [];
     let DepNo = [];
@@ -1366,7 +1367,8 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                 'currentDepartment': name,
                 'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
-                'Dep2Type':1
+                'Dep2Type':1,
+                'Notes' : newNotes
             });
             console.log('order updated');
         } catch (err) {
@@ -1381,7 +1383,8 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                 'currentDepartment': name,
                 'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
-                'Dep2Type':2
+                'Dep2Type':2,
+                'Notes' : newNotes
             });
             console.log('order updated');
         } catch (err) {
@@ -1404,12 +1407,12 @@ router.post('/DepartmentRedirection',async (req,res)=>{
         try {
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                 'currentDepartment': orderDep,
-                'visitedDeps': `[${x}] → ` + `[${orderDep}]`
+                'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
+                'Notes' : newNotes
             });
             console.log('order updated');
         } catch (err) {
             console.log("error updating visited deps and dep number");
-            throw err;
         }
     }
 /*

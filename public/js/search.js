@@ -6,6 +6,13 @@ const ordersHolder = orders[0].innerHTML;
 const Dep2Type = document.querySelector('.Dep2Type');
 const Dep2TypeInput = document.querySelector('.Dep2Type-input');
 
+const notes = document.querySelector('.notes');
+const notesHolder = document.querySelector('.newNotes');
+
+const fn = ()=>{
+    notesHolder.value = notes.value;
+}
+
 
 const errorBox = document.querySelector('.error');
 const successBox = document.querySelector('.success');
