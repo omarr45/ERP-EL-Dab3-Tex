@@ -54,3 +54,9 @@ h3{
     padding: 5px;
     border-radius: 10px;
 }
+.success{
+    font-size : 20px;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+}

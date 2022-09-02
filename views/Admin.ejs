@@ -15,8 +15,8 @@
 <label for="exampleDataList" class="form-label">Search</label>
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
 <div class="orders-box">
-    <% let arr = ['قسم-الفرد','قسم-الرام-تثبيت','قسم-الرام-تجهيز', 'قسم-طباعه', 'قسم-صباغه', 'قسم-بوليش', 'قسم-كستره','قسم-كمبكتور-علي-المفتوح','قسم-كمبكتور-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
-    <%for(let j = 0 ;j<=11;j++){%>
+    <% let arr = ['قسم-الفرد','قسم-الرام', 'قسم-طباعه', 'قسم-صباغه', 'قسم-بوليش', 'قسم-كستره','قسم-كمبكتور-علي-المفتوح','قسم-تجهيز-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
+    <%for(let j = 0 ;j<=10  ;j++){%>
     <div class="horizontal-line" style="color: white; text-align: center; font-size: 30px"><%= arr[j] %></div>
         <%for(let i = 0 ;i<records.length;i++){%>
             <%if(records[i].currentDepartment === arr[j]){%>

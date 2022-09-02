@@ -8,13 +8,16 @@
     <title>El Dab3 Tex</title>
 </head>
 <body>
-<h3>الاوردرات الخاصه بقسم كمبكتور علي المقفول</h3>
+<h3>الاوردرات الخاصه بقسم تجهيز علي المقفول</h3>
 <h3> <a style="text-decoration: none; color: white" href="/logout">تسجيل الخروج</a> </h3>
 <label for="exampleDataList" class="form-label">ابحث</label>
 <input oninput="search()"  class="form-control form-label-css"  id="exampleDataList" placeholder="Type to search...">
+<div class="success alert-success" role="alert">
+    <%= successOrder %>
+</div>
 <div class="orders-box">
     <%for(let i = 0 ;i<records.length;i++){%>
-    <%if(records[i].currentDepartment==="قسم-كمبكتور-علي-المقفول"){%>
+    <%if(records[i].currentDepartment==="قسم-تجهيز-علي-المقفول"){%>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title currentDep">رقم الكارت : <%= records[i].orderNo %></h5>
@@ -39,19 +42,19 @@
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
                     <label for="exampleDataList" class="form-label">توجيه</label>
-                    <input oninput="sel()" name="orderDep" class="form-control Dep2Type-input list" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                    <datalist id="datalistOptions">
+                    <!--<input oninput="sel()" name="orderDep" class="form-control Dep2Type-input list" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">-->
+                    <select id="exampleDataList" name="orderDep" class="form-select">
                         <option value="قسم-الفرد">قسم الفرد</option>
                         <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
                         <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
                         <option value="قسم-طباعه">قسم طباعه</option>
                         <option value="قسم-صباغه">قسم صباغه</option>
                         <option value="قسم-وبريات">قسم وبريات</option>
-                        <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
+                        <option value="قسم تجهيز علي المقفول">قسم كمبكتور علي المفتوح</option>
                         <option value="قسم-تغليف">قسم تغليف</option>
                         <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
                         <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
-                    </datalist>
+                    </select>
                     <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
                     <button style="margin: 10px; " class="btn btn-outline-primary submit" type="submit" >Redirect</button>
                 </form>

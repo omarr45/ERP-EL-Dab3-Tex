@@ -87,8 +87,10 @@ router.post('/DeleteOrder',async(req,res)=>{
         res.redirect('/login');
     };
     console.log(req.body.page);
-    if(req.body.page === "order")
+    if(req.body.page === "order") {
+        successOrder.push("تم مسح الاوردر بنجاح")
         res.redirect('/');
+    }
     else
         res.redirect('/Admin');
 })
@@ -367,7 +369,7 @@ router.post('/addOrder',async (req,res)=>{
                 errorsOrder.push("لم يتم اضافه الاوردر برجاء تفقد شبكه الانترنت او الرجوع للمطور")
                 res.render('Login', errorsOrder);
             }
-        } else if (orderDep === "قسم-كمبكتور-علي-المقفول") {
+        } else if (orderDep === "قسم-تجهيز-علي-المقفول") {
             try {
                 const newOrder = await new Orders({
                     orderNo,
@@ -580,9 +582,10 @@ router.get('/Dep1', async (req,res)=>{
             }
         })
     })
-    console.log(docs);
-    console.log(docs[0].graphNo);
-    res.render(dir+'views/Dep1.ejs',{records:docs});
+    /*console.log(docs);
+    console.log(docs[0].graphNo);*/
+    res.render(dir+'views/Dep1.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 //Dep2 = قسم الرام
@@ -627,7 +630,8 @@ router.get('/Dep2', async (req,res)=>{
         })
     })
     //console.log(docsArr2);
-    res.render(dir+'views/Dep2.ejs',{records:docs});
+    res.render(dir+'views/Dep2.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 //Dep3 = قسم الرام
@@ -671,7 +675,8 @@ router.get('/Dep3', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep3.ejs',{records:docs});
+    res.render(dir+'views/Dep3.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 // Dep4  = صباغه
@@ -714,7 +719,8 @@ router.get('/Dep4', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep4.ejs',{records:docs});
+    res.render(dir+'views/Dep4.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 
@@ -758,7 +764,8 @@ router.get('/Dep5', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep5.ejs',{records:docs});
+    res.render(dir+'views/Dep5.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 
@@ -846,7 +853,8 @@ router.get('/Dep7', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep7.ejs',{records:docs});
+    res.render(dir+'views/Dep7.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 
@@ -891,7 +899,8 @@ router.get('/Dep8',async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep8.ejs',{records:docs});
+    res.render(dir+'views/Dep8.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 // Dep9  = تغليف
@@ -934,7 +943,8 @@ router.get('/Dep9', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep9.ejs',{records:docs});
+    res.render(dir+'views/Dep9.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 // Dep10  = جاهز للاستلام
@@ -977,7 +987,8 @@ router.get('/Dep10', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep10.ejs',{records:docs});
+    res.render(dir+'views/Dep10.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 // Dep11  = جاهز للاستلام
@@ -1020,7 +1031,8 @@ router.get('/Dep11', async (req,res)=>{
             }
         })
     })
-    res.render(dir+'views/Dep11.ejs',{records:docs});
+    res.render(dir+'views/Dep11.ejs',{records:docs,successOrder:successOrder});
+    successOrder = [];
 })
 
 
@@ -1170,7 +1182,7 @@ departmentsExitTime.set('قسم-صباغه','Dep4ExitTime');
 departmentsExitTime.set('قسم-وبريات','Dep5ExitTime');
 departmentsExitTime.set('قسم-كستره','Dep6ExitTime');
 departmentsExitTime.set('قسم-كمبكتور-علي-المفتوح','Dep7ExitTime');
-departmentsExitTime.set('قسم-كمبكتور-علي-المقفول','Dep8ExitTime');
+departmentsExitTime.set('قسم-تجهيز-علي-المقفول','Dep8ExitTime');
 departmentsExitTime.set('قسم-تغليف','Dep9ExitTime');
 departmentsExitTime.set('قسم-غسيل-الطباعه','Dep10ExitTime');
 departmentsExitTime.set('قسم-جاهز-للاستلام','Dep11ExitTime');
@@ -1183,17 +1195,21 @@ departmentsEntryTime.set('قسم-صباغه','Dep4EntryTime');
 departmentsExitTime.set('قسم-وبريات','Dep5EntryTime');
 departmentsEntryTime.set('قسم-كستره','Dep6EntryTime');
 departmentsEntryTime.set('قسم-كمبكتور-علي-المفتوح','Dep7EntryTime');
-departmentsEntryTime.set('قسم-كمبكتور-علي-المقفول','Dep8EntryTime');
+departmentsEntryTime.set('قسم-تجهيز-علي-المقفول','Dep8EntryTime');
 departmentsEntryTime.set('قسم-تغليف','Dep9EntryTime');
 departmentsEntryTime.set('قسم-غسيل-الطباعه','Dep10EntryTime');
 departmentsEntryTime.set('قسم-جاهز-للاستلام','Dep11EntryTime');
 
 
+router.post('/try',(req,res)=>{
+   console.log(req.body.orderDep + " ay 7agaa");
+});
 
 router.post('/DepartmentRedirection',async (req,res)=>{
     // To get the visitedDeps value;
     console.log("i am here");
     const {orderDep,currentDep} = req.body;
+    console.log(orderDep);
     let docs;
     let docsArr = [];
     let DepNo = [];
@@ -1255,7 +1271,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             DepNo.push(docHolder.split(':'));
         })
     }
-    catch (err){res.redirect('/');}
+    catch (err){console.log("error 1");}
 
     // to get visited deps
     try {
@@ -1308,13 +1324,14 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             mediumRequired:0,
             widthRequired:0,
             machineNo:0,
+            optionList:0,
         });
         docs.forEach(doc=>{
             let docHolder = doc.toString().replace(/[{'}]/g,'  ');
             docsArr.push(docHolder.split(':'));
         })
     }//13 => 15
-    catch (err){res.redirect('/');}
+    catch (err){console.log("error 2");}
     let docsArr2 = [];
     docsArr.forEach(rec=>{
         rec.forEach(re=>{
@@ -1324,15 +1341,17 @@ router.post('/DepartmentRedirection',async (req,res)=>{
         })
     })
 
+    console.log(docs);
+
     // Update its values
     let No = parseInt(DepNo[0][4]);
     No++;
-    console.log(No);
+    //console.log(No);
     //let depNoSpaces = docsArr2[1].replace(/ /g, '');
     let x = docsArr2[5];
     //console.log("1  " + docsArr2[5] +"  2  " + docsArr2[6] +" 3  " + docsArr2[7] + "  4  " + docsArr2[8]  )
     x = x.replace(/^\s+|\s+$/gm,'');
-    console.log(x);
+   // console.log(x);
     console.log(orderDep);
 
     let obj ={};
@@ -1347,12 +1366,11 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                 'currentDepartment': name,
                 'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
-                'DepNo': No,
                 'Dep2Type':1
             });
             console.log('order updated');
         } catch (err) {
-            res.redirect('/');
+            console.log("error 3")
         }
     }
     else if(orderDep ==='قسم-الرام-تجهيز'){
@@ -1363,26 +1381,35 @@ router.post('/DepartmentRedirection',async (req,res)=>{
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                 'currentDepartment': name,
                 'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
-                'DepNo': No,
                 'Dep2Type':2
             });
             console.log('order updated');
         } catch (err) {
-            res.redirect('/');
+            console.log("error 5")
         }
     }
     else {
         try {
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj});
+            console.log('order updated');
+        } catch (err) {
+            console.log("error updating Entry");
+        }
+        try {
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {$set: obj2});
+            console.log('order updated');
+        } catch (err) {
+            console.log("error updating Entry");
+        }
+        try {
             await Orders.updateOne({'orderNo': req.body.currentOrderNo}, {
                 'currentDepartment': orderDep,
-                'visitedDeps': `[${x}] → ` + `[${orderDep}]`,
-                'DepNo': No
+                'visitedDeps': `[${x}] → ` + `[${orderDep}]`
             });
             console.log('order updated');
         } catch (err) {
-            res.redirect('/');
+            console.log("error updating visited deps and dep number");
+            throw err;
         }
     }
 /*
@@ -3186,7 +3213,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
     */
 
 
-    console.log(currentDep);
+    console.log(currentDep + "  vvvv");
     let depHolder;
     if(currentDep === "قسم-الفرد")
         depHolder="Dep1";
@@ -3200,7 +3227,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
         depHolder="Dep5";
     else if(currentDep === "قسم-كمبكتور-علي-المفتوح")
         depHolder="Dep7";
-    else if(currentDep === "قسم-كمبكتور-علي-المقفول")
+    else if(currentDep === "قسم-تجهيز-علي-المقفول")
         depHolder="Dep8";
     else if(currentDep === "قسم-تغليف")
         depHolder="Dep9";
@@ -3208,6 +3235,7 @@ router.post('/DepartmentRedirection',async (req,res)=>{
         depHolder="Dep10";
     else if(currentDep === "قسم-جاهز-للاستلام")
         depHolder="Dep11";
+    successOrder.push("تم توجيه الاوردر بنجاح")
     res.redirect(`/${depHolder}`);
 })
 

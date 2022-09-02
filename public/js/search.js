@@ -7,6 +7,21 @@ const Dep2Type = document.querySelector('.Dep2Type');
 const Dep2TypeInput = document.querySelector('.Dep2Type-input');
 
 
+const errorBox = document.querySelector('.error');
+const successBox = document.querySelector('.success');
+if(successBox.innerText.length){
+    successBox.classList.add('success');
+}
+else{
+    successBox.classList.remove('success');
+}
+
+if(errorBox.innerText.length){
+    errorBox.classList.add('error');
+}
+else{
+    errorBox.classList.remove('error');
+}
 
 const sel = () =>{
     if(Dep2TypeInput.value === 'قسم-الرام-تثبيت'){
