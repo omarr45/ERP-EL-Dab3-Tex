@@ -1,222 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/order.css">
-    <link rel="stylesheet" href="/css/Dep1.css">
-    <title>El Dab3 Tex</title>
-</head>
-<body>
-<form action="/addOrder" method="POST" class="order-from mb-3">
-    <h1>قسم مخزن الخام</h1>
-    <br>
-    <div class="error alert-danger" role="alert">
-        <%= errorsOrder %>
-    </div>
-    <div class="success alert-success" role="alert">
-        <%= successOrder %>
-    </div>
-    <br>
-    <div class="form-check">
-        <input class="form-check-input" value="طباعه" type="radio" name="flexRadioDefault" id="Teba3a" required>
-        <label class="form-check-label" for="Teba3a">
-            طباعه
-        </label>
+    <head>
+        <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/order.css">
+        <link rel="stylesheet" href="/css/Dep1.css">
+        <title>El Dab3 Tex</title>
+    </head>
+    <body>
+        <form action="/addOrder" method="POST" class="order-from d-flex gap-3 flex-column justify-content-center align-items-center">
+            <div class="error alert-danger" role="alert">
+                <%= errorsOrder %>
+            </div>
+            <div class="success alert-success" role="alert">
+                <%= successOrder %>
+            </div>
 
-    </div>
-    <label for="graphNo" class="form-label graphNo">رقم الرسمه</label>
-    <input type="text" class="form-control graphNo" id="graphNo" name="graphNo">
-    <div class="form-check">
-        <input class="form-check-input" value="صباغه" type="radio" name="flexRadioDefault" id="Seba8a">
-        <label class="form-check-label" for="Seba8a">
-            صباغه
-        </label>
-    </div>
-    <label for="requiredColor"  class="form-label requiredColor">اللون المطلوب</label>
-    <input type="text" class="form-control requiredColor" id="requiredColor" name="requiredColor">
-    <div class="input-group input-group-sm mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">رقم العميل</span>
-        <input type="number" class="form-control" name="clientName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">المتوسط المطلوب</span>
-        <input type="number" step=".001" class="form-control" name="mediumRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">العرض المطلوب</span>
-        <input type="number" step=".001" class="form-control" name="widthRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" value="دائري" type="radio" name="flexRadioDefault2" id="circular" required>
-        <label class="form-check-label" for="circular">
-            نسيج دائري
-        </label>
+            <h1>قسم مخزن الخام</h1>
+            <br>
+            
+            <div class="d-flex align-items-center justify-content-evenly w-100">
+                <div class="form-check">
+                    <input class="form-check-input" value="طباعه" type="radio" name="flexRadioDefault" id="Teba3a" required>
+                    <label class="form-check-label" for="Teba3a">
+                        طباعه
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" value="صباغه" type="radio" name="flexRadioDefault" id="Seba8a">
+                    <label class="form-check-label" for="Seba8a">
+                        صباغه
+                    </label>
+                </div>
+            </div>
 
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" value="مستطيل" type="radio" name="flexRadioDefault2" id="rectangular">
-        <label class="form-check-label" for="rectangular">
-            نسيج مستطيل
-        </label>
-    </div>
-    <label for="machineNo"  class="form-label requiredColor">رقم المكينه</label>
-    <input type="number" class="form-control requiredColor" id="machineNo" name="machineNo" required>
-    <div class="mb-3">
-        <label for="orderNumber" class="form-label">رقم الاوردر</label>
-        <input type="number" class="form-control" id="orderNumber" name="orderNo" required>
-    </div>
-    <div class="mb-3">
-        <label for="exampleDataList2" class="form-label">نوع الاوردر</label>
-        <input name="orderType" class="form-control  list2" list="datalistOptions2" id="exampleDataList2" placeholder="Type to search..." required>
-        <datalist id="datalistOptions2">
-            <% for(let i = 1 ;i<options.length;i++){%>
-                <option value="<%=options[i]%>"><%=options[i]%></option>
+            <!-- TODO: handle those -->
+            <label for="graphNo" class="form-label graphNo">رقم الرسمه</label>
+            <input type="text" class="form-control graphNo" id="graphNo" name="graphNo">
+            
+            <label for="requiredColor"  class="form-label requiredColor">اللون المطلوب</label>
+            <input type="text" class="form-control requiredColor" id="requiredColor" name="requiredColor">
+            
+            <div class="input-group input-group-sm">
+                <input type="number" class="form-control" name="clientName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <span class="input-group-text" id="inputGroup-sizing-sm">رقم العميل</span>
+            </div>
+            
+            <div class="input-group input-group-sm">
+                <input type="number" step=".001" class="form-control" name="mediumRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <span class="input-group-text" id="inputGroup-sizing-sm">المتوسط المطلوب</span>
+            </div>
+            
+            <div class="input-group input-group-sm">
+                <input type="number" step=".001" class="form-control" name="widthRequired" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                <span class="input-group-text" id="inputGroup-sizing-sm">العرض المطلوب</span>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-evenly w-100">
+                <div class="form-check">
+                    <input class="form-check-input" value="دائري" type="radio" name="flexRadioDefault2" id="circular" required>
+                    <label class="form-check-label" for="circular">
+                        نسيج دائري
+                    </label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" value="مستطيل" type="radio" name="flexRadioDefault2" id="rectangular">
+                    <label class="form-check-label" for="rectangular">
+                        نسيج مستطيل
+                    </label>
+                </div>
+            </div> 
+            
+            <div class="input-group input-group-sm">
+                <input type="number" class="form-control requiredColor" id="machineNo" name="machineNo" required>
+                <span class="input-group-text" id="inputGroup-sizing-sm">رقم المكينة</span>
+            </div>
+            
+            <div class="input-group input-group-sm">
+                <input type="number" class="form-control" id="orderNumber" name="orderNo" required>
+                <span class="input-group-text" id="inputGroup-sizing-sm">رقم الأوردر</span>
+            </div>
+            
+            <div class="input-group input-group-sm">
+                <input name="orderType" class="form-control  list2" list="datalistOptions2" id="exampleDataList2" placeholder="ابحث ..." required>
+                <datalist id="datalistOptions2">
+                    <% for(let i = 1 ;i<options.length;i++){%>
+                        <option value="<%=options[i]%>"><%=options[i]%></option>
+                    <%}%>
+                </datalist>
+                <span class="input-group-text" id="inputGroup-sizing-sm">نوع الأوردر</span>
+            </div>
+            
+            <div class="input-group input-group-sm">
+                <input oninput="sel()" name="orderDep" class="Dep2Type-input form-control  list" list="datalistOptions" id="exampleDataList" placeholder="ابحث ..." required>
+                <datalist id="datalistOptions">
+                    <option value="قسم-الفرد">قسم الفرد</option>
+                    <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
+                    <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
+                    <option value="قسم-طباعه">قسم طباعه</option>
+                    <option value="قسم-صباغه">قسم صباغه</option>
+                    <option value="قسم-وبريات">قسم وبريات</option>
+                    <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
+                    <option value="قسم-تجهيز-علي-المقفول">قسم تجهيز علي المقفول</option>
+                    <option value="قسم-تغليف">قسم تغليف</option>
+                    <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
+                    <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
+                </datalist>
+                <span class="input-group-text" id="inputGroup-sizing-sm">توجيه</span>
+            </div>
+            
+            <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
+
+            <div class="input-group input-group-sm">
+                <textarea name="Notes" class="form-control" aria-label="With textarea"></textarea>
+                <span class="input-group-text">ملاحظات</span>
+            </div>
+
+            <button onclick="addOrder()" style="margin: 10px" class="btn btn-primary submit" type="submit" >
+                إضافه الاوردر
+            </button>
+            
+        </form>
+
+        <div class="horizontal-line"></div>
+
+        <form action="/addType" method="POST" class="order-from m-3 d-flex gap-3 flex-column justify-content-center align-items-center">
+            
+            <label for="newType" class="form-label">اضافه نوع جديد</label>
+            <input type="text" class="form-control" id="newType" name="newType" required>
+            <button class="btn btn-primary submit" type="submit"> اضافه</button>
+
+        </form>
+
+        <!-- <div class="horizontal-line"></div> -->
+
+        <div class="orders-box">
+            <% let arr = ['قسم-الفرد','قسم-الرام-تثبيت','قسم-الرام-تجهيز', 'قسم-طباعه','قسم-صباغه', 'قسم-وبريات','قسم-كمبكتور-علي-المفتوح','قسم-تجهيز-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
+            <%for(let j = 0 ;j<=10;j++){%>
+                <% let empty = true %>
+                <div class="wrapper">
+                    <div class="horizontal-line" style="color: white; text-align: center; font-size: 30px">
+                        <%= arr[j] %>
+                    </div>
+
+                    <%if(arr[j] === "قسم-الرام-تجهيز"){%>
+                        <%for(let i = 0 ;i<records.length;i++){%>
+                        <%if(records[i].currentDepartment ===  "قسم-الرام" && records[i].Dep2Type === 2){%>
+                            <% empty = false %>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
+                                    <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                                    <%if(records[i].redirectionType==="طباعه"){%>
+                                        <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                                    <%}%>
+                                    <%if(records[i].redirectionType==="سباغه"){%>
+                                        <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
+                                    <%}%>
+                                    <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                                    <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                                    <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                                    <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
+                                    <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
+                                    <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
+                                    <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                                    <p class="card-text">النوع : تجهيز</p>
+                                    <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
+                                    <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
+                                    <form action="/DeleteOrder" method="POST" class="order-from">
+                                        <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
+                                        <input name="page" style="display:none;" value="order">
+                                        <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <%} %>
+                        <%}%>
+                    <%} else if(arr[j] === "قسم-الرام-تثبيت") {%>
+                        <%for(let i = 0 ;i<records.length;i++){%>
+                            <%if(records[i].currentDepartment === "قسم-الرام"&&  records[i].Dep2Type === 1){%>
+                                <% empty = false %>
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
+                                        <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                                        <%if(records[i].redirectionType==="طباعه"){%>
+                                            <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                                        <%}%>
+                                        <%if(records[i].redirectionType==="سباغه"){%>
+                                            <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
+                                        <%}%>
+                                        <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                                        <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                                        <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                                        <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
+                                        <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
+                                        <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
+                                        <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                                        <p class="card-text">النوع : تثبيت</p>
+                                        <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
+                                        <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
+                                        <form action="/DeleteOrder" method="POST" class="order-from">
+                                            <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
+                                            <input name="page" style="display:none;" value="order">
+                                            <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <%} %>
+                        <%}%>
+                    <%}else{%>
+                        <%for(let i = 0 ;i<records.length;i++){%>
+                            <%if(records[i].currentDepartment === arr[j]){%>
+                                <% empty = false %>
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
+                                        <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
+                                        <%if(records[i].redirectionType==="طباعه"){%>
+                                            <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
+                                        <%}%>
+                                        <%if(records[i].redirectionType==="سباغه"){%>
+                                            <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
+                                        <%}%>
+                                        <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
+                                        <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
+                                        <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
+                                        <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
+                                        <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
+                                        <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
+                                        <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
+                                        <p class="card-text">النوع : تثبيت</p>
+                                        <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
+                                        <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
+                                        <form action="/DeleteOrder" method="POST" class="order-from">
+                                            <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
+                                            <input name="page" style="display:none;" value="order">
+                                            <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <%} %>
+                        <%}%>
+                    <%}%>
+                    
+                    <%if(empty){%>
+                        <h5 >لا يوجد طلبات</h2>
+                    <%}%>
+                </div>
             <%}%>
-        </datalist>
-    </div>
-
-    <div class="mb-3">
-        <label for="exampleDataList" class="form-label">توجيه</label>
-        <input oninput="sel()" name="orderDep" class="Dep2Type-input form-control  list" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." required>
-        <datalist id="datalistOptions">
-            <option value="قسم-الفرد">قسم الفرد</option>
-            <option value="قسم-الرام-تثبيت">قسم الرام تثبيت</option>
-            <option value="قسم-الرام-تجهيز">قسم الرام تجهيز</option>
-            <option value="قسم-طباعه">قسم طباعه</option>
-            <option value="قسم-صباغه">قسم صباغه</option>
-            <option value="قسم-وبريات">قسم وبريات</option>
-            <option value="قسم-كمبكتور-علي-المفتوح">قسم كمبكتور علي المفتوح</option>
-            <option value="قسم-تجهيز-علي-المقفول">قسم تجهيز علي المقفول</option>
-            <option value="قسم-تغليف">قسم تغليف</option>
-            <option value="قسم-غسيل-الطباعه">قسم غسيل الطباعه</option>
-            <option value="قسم-جاهز-للاستلام">قسم جاهز للاستلام</option>
-        </datalist>
-        <input class="Dep2Type" name="Dep2Type" style="display:none;" value=" ">
-        <div class="input-group">
-            <span class="input-group-text">ملاحظات</span>
-            <textarea name="Notes" class="form-control" aria-label="With textarea"></textarea>
         </div>
-    </div>
-    <button onclick="addOrder()" style="margin: 10px" class="btn btn-primary submit" type="submit" >إضافه الاوردر</button>
-</form>
-<div class="mb-3">
-    <form action="/addType" method="POST" class="order-from">
-        <label for="newType"  class="form-label">اضافه نوع جديد</label>
-        <input type="text" class="form-control" id="newType" name="newType" required>
-        <button class="btn btn-primary submit m-3" type="submit"> اضافه</button>
-    </form>
-</div>
-<div class="horizontal-line"></div>
-<div class="orders-box">
-    <% let arr = ['قسم-الفرد','قسم-الرام-تثبيت','قسم-الرام-تجهيز', 'قسم-طباعه','قسم-صباغه', 'قسم-وبريات','قسم-كمبكتور-علي-المفتوح','قسم-تجهيز-علي-المقفول','قسم-تغليف', 'قسم-غسيل-الطباعه','قسم-جاهز-للاستلام'] %>
-    <%for(let j = 0 ;j<=10;j++){%>
-        <div class="horizontal-line" style="color: white; text-align: center; font-size: 30px"><%= arr[j] %></div>
-        <%if(arr[j] === "قسم-الرام-تجهيز"){%>
-        <%for(let i = 0 ;i<records.length;i++){%>
-        <%if(records[i].currentDepartment ===  "قسم-الرام" && records[i].Dep2Type === 2){%>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
-                    <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
-                    <%if(records[i].redirectionType==="طباعه"){%>
-                        <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
-                    <%}%>
-                    <%if(records[i].redirectionType==="سباغه"){%>
-                        <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
-                    <%}%>
-                    <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
-                    <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                    <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
-                    <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
-                    <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
-                    <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                    <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
-                    <p class="card-text">النوع : تجهيز</p>
-                    <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
-                    <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
-                    <form action="/DeleteOrder" method="POST" class="order-from">
-                        <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
-                        <input name="page" style="display:none;" value="order">
-                        <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
-                    </form>
-                </div>
-            </div>
-        <%} %>
-        <%}%>
-        <%} else if(arr[j] === "قسم-الرام-تثبيت") {%>
-        <%for(let i = 0 ;i<records.length;i++){%>
-        <%if(records[i].currentDepartment === "قسم-الرام" && records[i].Dep2Type === 1){%>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
-                    <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
-                    <%if(records[i].redirectionType==="طباعه"){%>
-                        <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
-                    <%}%>
-                    <%if(records[i].redirectionType==="سباغه"){%>
-                        <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
-                    <%}%>
-                    <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
-                    <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                    <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
-                    <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
-                    <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
-                    <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                    <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
-                    <p class="card-text">النوع : تثبيت</p>
-                    <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
-                    <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
-                    <form action="/DeleteOrder" method="POST" class="order-from">
-                        <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
-                        <input name="page" style="display:none;" value="order">
-                        <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
-                    </form>
-                </div>
-            </div>
-        <%} %>
-        <%}%>
-        <%}else{%>
-        <%for(let i = 0 ;i<records.length;i++){%>
-        <%if(records[i].currentDepartment === arr[j]){%>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title currentDep">رقم الاوردر : <%= records[i].orderNo %></h5>
-                    <p class="card-text">نوع التوجيه :  <%= records[i].redirectionType %></p>
-                    <%if(records[i].redirectionType==="طباعه"){%>
-                        <p class="card-text">رقم الرسمه :  <%= records[i].graphNo %> </p>
-                    <%}%>
-                    <%if(records[i].redirectionType==="سباغه"){%>
-                        <p class="card-text">اللون المطلوب :  <%= records[i].requiredColor %> </p>
-                    <%}%>
-                    <p class="card-text">المتوسط المطلوب :  <%= records[i].mediumRequired %> </p>
-                    <p class="card-text">العرض المطلوب :  <%= records[i].widthRequired %> </p>
-                    <p class="card-text">نوع النسيج :  <%= records[i].textureType %> </p>
-                    <p class="card-text">رقم المكينه :  <%= records[i].machineNo %> </p>
-                    <p class="card-text">وقت الاوردر :  <%= records[i].time %> </p>
-                    <p class="card-text">نوع الاوردر :  <%= records[i].type %></p>
-                    <p class="card-text currentDep">القسم الحالي :  <%= records[i].currentDepartment %></p>
-                    <p class="card-text">النوع : تثبيت</p>
-                    <p class="card-text">رقم العميل :  <%= records[i].clientName %></p>
-                    <p class="card-text notes">ملاحظات :  <%= records[i].Notes %></p>
-                    <form action="/DeleteOrder" method="POST" class="order-from">
-                        <input name="currentOrderNo" style="display:none;" value="<%=records[i].orderNo%>">
-                        <input name="page" style="display:none;" value="order">
-                        <button style="margin: 10px" class="btn btn-danger submit" type="submit" >مسح الاوردر</button>
-                    </form>
-                </div>
-            </div>
-        <%} %>
-        <%}%>
-        <%}%>
-    <%}%>
-</div>
 
-
-<script src="/js/order.js"></script>
-</body>
+        <script src="/js/order.js"></script>
+    </body>
 </html>
